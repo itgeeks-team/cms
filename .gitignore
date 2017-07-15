@@ -7,3 +7,4 @@
 /.sass-cache
 /.tmp
 .gitattributes
+/node_modules
