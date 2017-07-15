@@ -29,10 +29,7 @@
     -->
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/CodePen.css">
-    <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/Shared.css">
+    <link rel="stylesheet" href="/styles/app.css">
     <!--STYLES END-->
   </head>
 
@@ -89,6 +86,11 @@
           + Use a different preprocessor, like TypeScript
 
     -->
+    <!--LIVERELOAD CHROME PLUGIN-->
+    <% if (sails.config.livereloadPath) { %>
+        <script src="<%= sails.config.livereloadPath %>"></script>
+    <% } %>
+    <!--LIVERELOAD CHROME PLUGIN END-->
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>

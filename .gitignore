@@ -1,4 +1,14 @@
-﻿/node_modules
+﻿
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/.vscode
+/.sass-cache
+/.tmp
+.gitattributes
+/node_modules
 /.vs/VSWorkspaceState.json
 /.vs/tasks.vs.json
 /.vs/slnx.sqlite-journal
