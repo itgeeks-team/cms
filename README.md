@@ -1,4 +1,4 @@
-# Internal CRM Site
+# Internal CMS Site
 A sails js application project
 
 ## Getting Started
