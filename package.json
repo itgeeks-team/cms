@@ -35,6 +35,6 @@
   "author": "IT-Geeks Team",
   "license": "",
   "devDependencies": {
-    "sails-hook-autoreload@for-sails-0,12": "^0.14.1"
+    "sails-hook-autoreload": "^0.14.1"
   }
 }

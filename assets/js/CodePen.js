@@ -1,4 +1,4 @@
-﻿var CodePen = (function () {
+﻿var Codepen = (function () {
     $outputContainer = $(".output-container");
 
     var fullScreen = function (isFullScreen) {
