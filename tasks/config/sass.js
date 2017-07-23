@@ -8,7 +8,10 @@ module.exports = function(grunt) {
 				src: ['app.scss'],
 				dest: '.tmp/public/styles/',
 				ext: '.css'
-			}]
+			}],
+			options: {
+				loadPath: "sources/scss"
+			}
 		}
 	});
 

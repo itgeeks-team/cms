@@ -14,13 +14,68 @@
  * or any other Grunt tasks you like.)
  */
 
-@import '../../sources/in-house/_variables.scss';
-@import '../../sources/vendor/bootstrap/bootstrap.scss';
-@import '../../sources/in-house/_shared.scss';
-@import '../../sources/in-house/_codepen.scss';
+/*=============================================
+=            1st. Our Custom Helpers          =
+=============================================*/
+@import
+  "utils/variables",
+  "utils/functions",
+  "utils/mixins",
+  "utils/placeholders";
+/*=====  End of Our Custom Helpers     ======*/
 
-// For example:
-//
-// @import 'foundation.scss';
-//
-// etc.
+/*=============================================
+=            2nd.External Frameworks          =
+=============================================*/
+@import
+  "vendors/bootstrap/bootstrap";
+/*=====  End of External Frameworks    ======*/
+
+/*=============================================
+=            3rd.Set Default Stlyes           =
+=            (Shared for all pages)           =
+=============================================*/
+@import
+  "base/reset",
+  "base/typography";
+/*=====  End of Set Default Stlyes     ======*/
+
+/*=============================================
+=            4th.Layout Styles                =
+=============================================*/
+@import
+  "layout/chatbox",
+  "layout/chatroom",
+  "layout/codepen",
+  "layout/comment",
+  "layout/forms",
+  "layout/header",
+  "layout/navigation",
+  "layout/post",
+  "layout/sidebar",
+  "layout/thread";
+/*=====     End of Layout Styles       ======*/
+
+/*=============================================
+=            5th.Component Styles             =
+=============================================*/
+@import
+  "components/buttons",
+  "components/dropdown",
+  "components/textboxes";
+/*=====     End of Component Styles    ======*/
+
+/*=============================================
+=            6th.Page Styles             =
+=============================================*/
+@import
+  "pages/home",
+  "pages/chat";
+/*=====     End of Component Styles    ======*/
+
+/*=============================================
+=            6th.Theme Styles             =
+=============================================*/
+@import
+  "themes/default";
+/*=====      End of Theme Styles       ======*/
