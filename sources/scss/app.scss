@@ -1,0 +1,83 @@
+/**
+ * importer.scss
+ *
+ * By default, new Sails projects are configured to compile this file
+ * from SASS to CSS.  Unlike CSS files, SASS files are not compiled and
+ * included automatically unless they are imported below.
+ *
+ * The SASS files imported below are compiled and included in the order
+ * they are listed.  Mixins, variables, etc. should be imported first
+ * so that they can be accessed by subsequent SASS stylesheets.
+ *
+ * (Just like the rest of the asset pipeline bundled in Sails, you can
+ * always omit, customize, or replace this behavior with SASS, SCSS,
+ * or any other Grunt tasks you like.)
+ */
+
+/*=============================================
+=            1st. Our Custom Helpers          =
+=============================================*/
+@import
+  "utils/variables",
+  "utils/functions",
+  "utils/mixins",
+  "utils/placeholders";
+/*=====  End of Our Custom Helpers     ======*/
+
+/*=============================================
+=            2nd.External Frameworks          =
+=============================================*/
+@import
+  "vendors/bootstrap/bootstrap",
+  "vendors/codemirror/codemirror";
+/*=====  End of External Frameworks    ======*/
+
+/*=============================================
+=            3rd.Set Default Stlyes           =
+=            (Shared for all pages)           =
+=============================================*/
+@import
+  "base/reset",
+  "base/typography",
+  "base/shared";
+/*=====  End of Set Default Stlyes     ======*/
+
+/*=============================================
+=            4th.Layout Styles                =
+=============================================*/
+@import
+  "layout/chatbox",
+  "layout/chatroom",
+  "layout/comment",
+  "layout/forms",
+  "layout/header",
+  "layout/navigation",
+  "layout/post",
+  "layout/sidebar",
+  "layout/thread";
+/*=====     End of Layout Styles       ======*/
+
+/*=============================================
+=            5th.Component Styles             =
+=============================================*/
+@import
+  "components/buttons",
+  "components/dropdown",
+  "components/textboxes";
+/*=====     End of Component Styles    ======*/
+
+/*=============================================
+=            6th.View Styles             =
+=============================================*/
+@import
+  "views/home",
+  "views/chat",
+  "views/work";
+/*=====     End of Component Styles    ======*/
+
+/*=============================================
+=            6th.Theme Styles             =
+=============================================*/
+@import
+  "themes/default";
+/*=====      End of Theme Styles       ======*/

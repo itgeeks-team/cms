@@ -20,6 +20,9 @@ module.exports = function(grunt) {
     dist: {
       src: ['.tmp/public/concat/production.css'],
       dest: '.tmp/public/min/production.min.css'
+    },
+    options: {
+      keepSpecialComments: 0
     }
   });
 

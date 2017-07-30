@@ -11,16 +11,16 @@ var vm = {
         "codemirror/mode/css",
         "codemirror/mode/javascript",
         "codemirror/mode/htmlmixed",
+        "codemirror/addon/active-line",
+        "js-beautify/beautify.min",
+        "js-beautify/beautify-css.min",
+        "js-beautify/beautify-html.min",
         "work"
-    ],
-
-    styles: [
-        "codemirror/codemirror"
     ]
-}
+};
 
 module.exports = {
-    index: function(req, res) {
+    work: function(req, res) {
 		return res.view(vm);
 	}
 };

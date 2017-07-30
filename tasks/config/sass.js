@@ -4,11 +4,14 @@ module.exports = function(grunt) {
 		dev: {
 			files: [{
 				expand: true,
-				cwd: 'assets/styles/',
+				cwd: 'sources/scss/',
 				src: ['app.scss'],
 				dest: '.tmp/public/styles/',
 				ext: '.css'
-			}]
+			}],
+			options: {
+				loadPath: "sources/scss"
+			}
 		}
 	});
 
