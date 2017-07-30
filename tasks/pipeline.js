@@ -26,6 +26,9 @@ var cssFilesToInject = [
 var jsFilesToInject = [
     'js/dependencies/sails.io.js',
     'js/dependencies/jquery-3.2.1.min.js',
+
+    
+    'js/dependencies/jquery.validation.min.js', //Brian 20170730 Inserted
     'js/dependencies/*.js',
     'js/**/*.js'
 ];
