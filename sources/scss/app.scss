@@ -37,6 +37,7 @@
 =            (Shared for all pages)           =
 =============================================*/
 @import
+  "base/background",
   "base/reset",
   "base/typography",
   "base/shared";
@@ -63,6 +64,7 @@
 @import
   "components/buttons",
   "components/dropdown",
+  "components/navbar",
   "components/textboxes";
 /*=====     End of Component Styles    ======*/
 

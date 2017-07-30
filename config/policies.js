@@ -25,8 +25,13 @@ module.exports.policies = {
   * access)                                                                  *
   *                                                                          *
   ***************************************************************************/
-
   // '*': true,
+
+  //Brian 20170730 - Start
+  //By Default, it will redirect to page 500.ejs and display error there.
+  //This is to direct sails to /policies/flash.js when encounter error.
+  //Brian 20170730 - End
+   '*': 'flash',
 
   /***************************************************************************
   *                                                                          *

@@ -1,0 +1,110 @@
+.navbar {
+  border-bottom: 1px solid $light-cyan;
+}
+
+.navbar-nav {
+  flex: 4;
+}
+
+.navbar-toggler-left {
+  position: static;
+  margin-right: 1rem;
+}
+
+.navbar-brand {
+  flex: 2;
+}
+// .navbar-toggleable {
+//   @each $breakpoint in map-keys($grid-breakpoints) {
+//     $next: breakpoint-next($breakpoint, $grid-breakpoints);
+//     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+//     &#{$infix} {
+//       @include media-breakpoint-down($breakpoint) {
+//         .navbar-nav {
+//           .dropdown-menu {
+//             position: static;
+//             float: none;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+svg {
+  display: inline-block;
+}
+
+.nav-item {
+  position: relative;
+  &:hover {
+    &:after{
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: $light-cyan;
+    }
+  }
+}
+.nav-item.active {
+  .nav-link {
+    color: $grey-white !important;
+    background-color: $light-cyan;
+  }
+  &:hover {
+    &:after{
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+.navbar {
+  form[role=search] {
+    flex: 1;
+    & .form-item {
+      height: 100%;
+      display: block;
+      flex: 6;
+      &:last-child {
+        flex: 1;
+      }
+    }
+  }
+
+  input[role=search] {
+    font-family: inherit;
+    position: relative;
+    border: 0px;
+    border-radius: 0px;
+    width: 30%;
+    height: 100%;
+    background-color: $grey-white;
+    border: 0px solid $grey-dark;
+    transition: width .5s linear;
+    &:focus {
+      border-bottom: 1px solid $light-cyan;
+      color: $grey-dark;
+      width: 100%;
+      &::-webkit-input-placeholder {
+        color: $grey-dark;
+      }
+    }
+  }
+
+  button[role=search] {
+    height: 100%;
+    border: 0px;
+    border-radius: 0px;
+    background-color: $grey-white;
+    & svg:hover {
+      fill: $light-cyan;
+    }
+  }
+}
