@@ -36,6 +36,7 @@
 =            (Shared for all pages)           =
 =============================================*/
 @import
+  "base/background",
   "base/reset",
   "base/typography";
 /*=====  End of Set Default Stlyes     ======*/
@@ -44,16 +45,15 @@
 =            4th.Layout Styles                =
 =============================================*/
 @import
-  "layout/chatbox",
-  "layout/chatroom",
-  "layout/codepen",
-  "layout/comment",
-  "layout/forms",
-  "layout/header",
-  "layout/navigation",
-  "layout/post",
-  "layout/sidebar",
-  "layout/thread";
+  "layouts/chatbox",
+  "layouts/chatroom",
+  "layouts/codepen",
+  "layouts/comment",
+  "layouts/forms",
+  "layouts/header",
+  "layouts/post",
+  "layouts/sidebar",
+  "layouts/thread";
 /*=====     End of Layout Styles       ======*/
 
 /*=============================================
@@ -62,6 +62,7 @@
 @import
   "components/buttons",
   "components/dropdown",
+  "components/navbar",
   "components/textboxes";
 /*=====     End of Component Styles    ======*/
 
