@@ -14,10 +14,10 @@
  * or any other Grunt tasks you like.)
  */
 
-@import '../../sources/in-house/_variables.scss';
 @import '../../sources/vendor/bootstrap/bootstrap.scss';
-@import '../../sources/in-house/_shared.scss';
-@import '../../sources/in-house/_codepen.scss';
+@import '../../sources/_variables.scss';
+@import '../../sources/_shared.scss';
+@import '../../sources/_work.scss';
 
 // For example:
 //

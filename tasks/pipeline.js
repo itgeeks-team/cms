@@ -11,13 +11,13 @@
  *   https://github.com/balderdashy/sails-docs/blob/master/anatomy/myApp/tasks/pipeline.js.md
  */
 
-
 // CSS files to inject in order
 //
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-    'styles/**/*.css'
+    'styles/app.css'
+    //Controller should specify which css to load
 ];
 
 
@@ -27,7 +27,8 @@ var jsFilesToInject = [
     'js/dependencies/sails.io.js',
     'js/dependencies/jquery-3.2.1.min.js',
     'js/dependencies/*.js',
-    'js/**/*.js'
+    'js/shared.js',
+    // Controller should specify which js to load
 ];
 
 
