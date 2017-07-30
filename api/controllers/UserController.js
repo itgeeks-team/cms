@@ -12,7 +12,7 @@ module.exports = {
      },
     
     create: function(req,res,next){
-        User.create( req.params.all(), function userCreated(err,User){
+        User.create( req.params.all(), function userCreated(err,user){
 
             if(err){
 
@@ -25,7 +25,7 @@ module.exports = {
 
             } 
 
-            res.json(User);
+            res.json(user);
             req.session.flash = {};
         })
     } 

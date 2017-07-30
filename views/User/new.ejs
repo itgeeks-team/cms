@@ -1,32 +1,32 @@
 
-<body style="background:black;">
+<body>
     <div style="margin:10% auto;display:flex; justify-content:center; flex-direction:row;">
-        
-        <div id="middle" style="width:20%;">
-            <h1 style="color:aliceblue">Sign Up Page</h1>
-            <ul style="width:100%;color:antiquewhite;">
                 
-                    <% if(flash && flash.err){ %>
-                    <% Object.keys(flash.err).forEach(function(error) {%>
-                        <li>
-                        <%- JSON.stringify(flash.err[error]) %>
-                            </li>
-                        <% }) %>
-                    <%}%>   
-            </ul>
+
+        <div id="middle" style="width:30%;">
+            <h1>Sign Up Page</h1>
             <div style="width:100%;">
                 <form method="POST" action="/User/create">    
                     <div style="display:flex; flex-direction:column;justify-content:space-between;height:auto;">
-                        <input style="border:1px solid white;border-radius:15px 15px 2px 2px;text-align:center;padding:5px;" type="text" placeholder="User Name" name="name" />
-                        <input style="border:1px solid white;text-align:center;padding:5px;" type="text" placeholder="Title" name="title" />
-                        <input style="border:1px solid white;text-align:center;padding:5px;" type="text" placeholder="Email" name="email"/>
-                        <input style="border:1px solid white;text-align:center;padding:5px;" type="password" placeholder="Password" name="password" />
-                        <input style="border:1px solid white;text-align:center;padding:5px;" type="password" placeholder="Confirm Password" name="confirmation" />
-                        <input style="margin-top:5px;border-radius:10px; height:30px;" type="submit" value="Sign Up" />
-                        <input type="hidden" name="_csrf" value="<=% _csrf %>"
+                        <input type="text" placeholder="User Name" name="name" />
+                        <input type="text" placeholder="Title" name="title" />
+                        <input type="text" placeholder="Email" name="email"/>
+                        <input type="password" placeholder="Password" name="password" />
+                        <input type="password" placeholder="Confirm Password" name="confirmation" />
+                        <input type="submit" value="Sign Up" />
+                        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
                     </div>
                 </form>
             </div>
+                <% if(flash && flash.err){ %>
+            <ul>
+                    <% Object.keys(flash.err).forEach(function(error) {%>
+                    <li>
+                    <%- JSON.stringify(flash.err[error]) %>
+                        </li>
+                    <% }) %>
+            </ul>
+                <%}%>   
         </div>    
     </div>
 </body>

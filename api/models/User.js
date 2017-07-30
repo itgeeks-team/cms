@@ -25,9 +25,10 @@ module.exports = {
     },
     encryptedPassword:{
       type:'string'
-    },
+    }
+    ,
 
-    toJson: function(){
+    toJSON: function(){
       var obj = this.toObject();
       delete obj.password;
       delete obj.confirmation;
