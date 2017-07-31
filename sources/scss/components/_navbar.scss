@@ -79,7 +79,10 @@ svg {
   }
 
   input[role=search] {
+    font-size: 0.9rem !important;
     font-family: inherit;
+    font-weight: normal;
+    color: $grey-white;
     position: relative;
     border: 0px;
     border-radius: 0px;
@@ -95,6 +98,11 @@ svg {
       &::-webkit-input-placeholder {
         color: $grey-dark;
       }
+    }
+    &::-webkit-input-placeholder {
+      font-family: LatoWebLight, Arial, sans-serif;
+      font-style: italic;
+      color: $grey;
     }
   }
 
