@@ -1,4 +1,4 @@
-/**
+﻿/**
  * UserController
  *
  * @description :: Server-side logic for managing Users
@@ -6,15 +6,23 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var vm = {
+    title: "Sign Up",
+
+    scripts: [
+        "customeValidator"
+    ]
+};
+
 module.exports = {
-	'new':function(req,res){
-        res.view();
+	new: function(req, res){
+        res.view(vm);
      },
 
     //Brian 20170730 - Start
     //To create new User with parameter
     //Brian - End
-    create: function(req,res,next){
+    create: function(req, res, next){
         User.create( req.params.all(), function userCreated(err,user){
 
             if(err){

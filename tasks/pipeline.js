@@ -27,9 +27,6 @@ var jsFilesToInject = [
     'js/dependencies/sails.io.js',
     'js/dependencies/jquery-3.2.1.min.js',
     'js/dependencies/tether.min.js',
-
-    
-    'js/dependencies/jquery.validation.min.js', //Brian 20170730 Inserted
     'js/dependencies/*.js',
     'js/shared.js',
     // Controller should specify which js to load

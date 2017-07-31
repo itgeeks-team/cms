@@ -1,4 +1,5 @@
-Shared = (function() {
+﻿Shared = (function() {
+    // "I am {0}. {1} years old".format("John", 20);
     if (!String.prototype.format) {
         String.prototype.format = function() {
             var args = arguments;
