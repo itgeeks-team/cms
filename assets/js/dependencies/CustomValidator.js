@@ -2,8 +2,11 @@
 //Brian 20170730 - Start
 //Jquery Validation predefine for Form (Class="signup")
 //Brian 20170730 - End
-$(document).ready(function(){
-    $('.signup').validate({
+
+var validation = (function (){
+
+    var validate = function (form_1){
+         $(form_1).validate({
 
         rules: {
             name:{
@@ -30,4 +33,11 @@ $(document).ready(function(){
             .text('OK!').addClass('valid')
         }
     });
+    }
+    return{
+            validate:validate
+    }
+})();
+$(document).ready(function(){
+   validation.validate(".signup");
 });
