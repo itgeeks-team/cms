@@ -1,0 +1,9 @@
+input[type=text] {
+  font-size: 0.9rem !important;
+  font-weight: normal;
+  &::-webkit-input-placeholder {
+    font-family: LatoWebLight, Arial, sans-serif;
+    font-style: italic;
+    color: $grey;
+  }
+}

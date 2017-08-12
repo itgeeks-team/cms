@@ -5,10 +5,15 @@
  * 
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
+var vm = {
+    title : "User",
+        scripts: [
+        
+    ]
+};
 module.exports = {
 	'new':function(req,res){
-        res.view();
+        res.view(vm);
      },
 
     //Brian 20170730 - Start
