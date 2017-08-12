@@ -1,7 +1,24 @@
-$grey-dark : #212121;
-$grey : #BDBDBD;
-$grey-white : #FAFAFA;
-$white : #FFFFFF;
-$light-cyan : #26C6DA;
+$dark      : #212121;
+$grey      : #BDBDBD;
+$grey-white: #FAFAFA;
+$white     : #FFFFFF;
+$light-cyan: #26C6DA;
 
-$nav-tabs-active-link-hover-color: $grey-white;
+$color-primary : $light-cyan;
+$bg-color-primary : $grey-white;
+$selected-color-primary : $white;
+$active-text-color-primary : $dark;
+$disabled-text-color-primary : $grey;
+
+
+// Bootstrap variable override
+$nav-tabs-active-link-hover-color: $bg-color-primary;
+$brand-primary : $grey-white;
+$btn-secondary-border : $color-primary;
+$btn-secondary-bg : $bg-color-primary;
+
+$prefixes: (
+  webkit: "-webkit-",
+  moz: "-moz-",
+  o: "-o-"
+);
