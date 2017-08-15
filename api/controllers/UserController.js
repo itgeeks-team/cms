@@ -55,7 +55,7 @@ module.exports = {
         
     },
     index: function(req,res,next){
-        User.find(function foundUser (err, users){
+        User.find(function foundUsers (err, users){
             if(err) return next(err);
             res.view({
                 users:users
@@ -65,7 +65,7 @@ module.exports = {
     edit : function(req,res,next){
         User.findOne(req.param('id'),function foundUser(err,user){
             if(err) return next(err);
-            if(!user) return next();
+            if(!user) return next('User not found');
             res.view({
                 user:user
             });
@@ -78,6 +78,17 @@ module.exports = {
             }
 
             res.redirect('/user/show/' + req.param('id'));
+        });
+    },
+    destroy: function(req,res,next){
+        User.findOne(req.param('id'),function foundUser(err,user){
+            if(err) return next(err);
+            if(!user) return next('User not found');
+            User.destroy(req.param('id'), function userDestroyed(err,user){
+                if(err) return next(err);
+
+            });
+            res.redirect('/user');
         });
     }
 };
