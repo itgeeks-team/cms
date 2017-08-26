@@ -48,8 +48,8 @@ var Account = (function () {
       type: "POST",
       url: SITE_URL + "/session/destroy",
       data: {
-        _csrf           : $(target).next("input[name='_csrf']").val(),
-        view            : "components/header"
+        _csrf : $(target).next("input[name='_csrf']").val(),
+        view  : "components/header"
       },
       dataType: "html",
       success: function (res) {

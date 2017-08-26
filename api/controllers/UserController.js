@@ -20,8 +20,12 @@ module.exports = {
   //Brian - End
   create : function(req, res, next) {
     User.create(req.allParams()).exec(function (err, user) {
-      if (err) console.log(err);
-
+      if (err) {
+        req.session.flash = {
+          err : err
+        }
+        return res.redirect('/');
+      }
       return res.json(user);
     });
   },
