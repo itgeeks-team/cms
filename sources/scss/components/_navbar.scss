@@ -1,5 +1,5 @@
 .navbar {
-  border-bottom: 1px solid $color-primary;
+  @include set-prefix("box-shadow", "0px 1px 15px -1px #{$shadow-color-primary}");
   #navbar-content {
     align-self: stretch;
   }

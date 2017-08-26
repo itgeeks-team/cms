@@ -32,12 +32,17 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
+  'get /': {
     view: "static/index",
     locals: {
+      title : "Home",
       layout: "layouts/main"
     }
-  }
+  },
+
+  "post /session/new"     : "SessionController.new",
+  "post /session/destroy" : "SessionController.destroy",
+  "post /user/create"     : "UserController.create"
 
   /***************************************************************************
   *                                                                          *

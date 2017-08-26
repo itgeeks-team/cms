@@ -1,9 +1,43 @@
-input[type=text] {
-  font-size: 0.9rem !important;
-  font-weight: normal;
+input {
+  font-size: 0.8rem !important;
+  @include set-font();
   &::-webkit-input-placeholder {
-    font-family: LatoWebLight, Arial, sans-serif;
-    font-style: italic;
+    @include set-font("Light", "italic");
     color: $grey;
+  }
+
+  &.error {
+    border-color: $alert-color-primary;
+  }
+}
+
+#login,#sign-up {
+  fieldset {
+    .form-group {
+      display: flex;
+      flex-direction: row;
+      .form-control:focus{
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+    }
+    input {
+      border-radius: 0 0.25rem 0.25rem 0;
+      margin-left: -1px;
+      flex: 8;
+    }
+    span {
+      flex: 1;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-right: 0px;
+      border-radius: 0.25rem 0 0 0.25rem;
+      text-align: center;
+      padding: 5px;
+    }
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+    }
   }
 }

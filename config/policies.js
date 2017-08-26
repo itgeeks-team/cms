@@ -32,6 +32,7 @@ module.exports.policies = {
   //This is to direct sails to /policies/flash.js when encounter error.
   //Brian 20170730 - End
    '*': 'flash',
+   'SessionController' : 'test',
 
   /***************************************************************************
   *                                                                          *

@@ -19,7 +19,7 @@
 
 @mixin set-prefix($property: "transition", $value: ".5s ease-in-out 0s") {
   @each $prefix, $preValue in $prefixes {
-    #{$preValue}#{$property}: $value;
+    #{$preValue}#{$property}: #{$value};
   }
-  #{$property}: $value;
+  #{$property}: #{$value};
 }

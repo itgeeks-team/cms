@@ -12,38 +12,44 @@ module.exports = {
   schema:true,
 
   attributes: {
-    name:{
-      type:'string',
-      required:true
+    displayName : {
+      type     : 'string',
+      required : true
     },
-    title:{
-      type:'string'
+    username : {
+      type     : 'string',
+      required : true,
+      unique   : true
     },
-    email:{
-      type:'string',
-      email:true,
-      required:true,
-      unique:true
+    email : {
+      type     : 'string',
+      email    : true,
+      required : true,
+      unique   : true
     },
-    encryptedPassword:{
-      type:'string'
+    encryptedPassword : {
+      type : 'string'
     }
-    ,
+  },
+  beforeCreate : function (values, next) {
+    var bcrypt = require("bcryptjs");
+    if (!values.password || values.password != values.passwordConfirm) {
+      return next({err : "Password doesn't match password confirmation."});
+    }
+
+    bcrypt.hash(values.password, 10, function (err, hash) {
+      if (err) return next(err);
+      values.encryptedPassword = hash;
+      next();
+    });
+  },
     //Brian 20170730 - Start
     //This method is to delete object which is returned to the client.
-    //By default, if without toJson method and schema: true. 
+    //By default, if without toJson method and schema: true.
     //Client can use /user/create?.... to create anything they want.
     //To see different, comment toJson method and schema: true
     //and proceed with localhost:1337/User/new
     //Brian 20170730 - End
-    toJSON: function(){
-      var obj = this.toObject();
-      delete obj.password;
-      delete obj.confirmation;
-      delete obj.encryptedPassword;
-      delete obj._csrf;
-      return obj;
-    }
-  }
+
 };
 
