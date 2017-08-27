@@ -1,3 +1,7 @@
+/**
+ * Account class to manage account activity
+ * @class
+ **/
 var Account = (function () {
 
   var isEmail = function (value) {
@@ -16,8 +20,8 @@ var Account = (function () {
       },
       dataType: "html",
       success: function (res) {
-        $(".modal").modal("hide");
-        $("header").html(res);
+        $(".modal").modal("hide"); // Close modal-backdrop
+        $("header").html(res); // Get the partial html render in header
       }
     });
   }
@@ -37,8 +41,8 @@ var Account = (function () {
       },
       dataType: "html",
       success: function (res) {
-        $(".modal").modal("hide");
-        $("header").html(res);
+        $(".modal").modal("hide"); // Close modal-backdrop
+        $("header").html(res); // Get the partial html render in header
       }
     });
   }
@@ -53,8 +57,8 @@ var Account = (function () {
       },
       dataType: "html",
       success: function (res) {
-        $(".modal").modal("hide");
-        $("header").html(res);
+        $(".modal").modal("hide"); // Close modal-backdrop
+        $("header").html(res); // Get the partial html render in header
       }
     });
   }
