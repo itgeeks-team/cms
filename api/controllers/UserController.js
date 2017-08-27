@@ -24,7 +24,7 @@ module.exports = {
         req.session.flash = {
           err : err
         }
-        return res.redirect('/');
+        return res.redirect('/user');
       }
       return res.json(user);
     });

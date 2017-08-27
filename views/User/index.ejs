@@ -13,7 +13,7 @@
         <% _.each(users, function(user){ %>
         <tr data-id="<%= user.id %>" data-model="user">
             <td><%= user.id %></td>
-            <td><%= user.name %></td>
+            <td><%= user.displayName %></td>
             <td><%= user.title %></td>
             <td><%= user.email %></td>
             <td><a class="btn btn-sm btn-primary" href="/user/show/<%= user.id %>">Show</a></td>
