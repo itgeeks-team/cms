@@ -11,6 +11,12 @@ module.exports = {
 
   /**
    * `SessionController.new()`
+   * @author David Tan
+   * @description Create session after authenticated posted values
+   * @param {object} req
+   * @param {object} res
+   * @param {callback} next
+   * @returns {HTML} partial view from ejs
    */
   new: function (req, res, next) {
     var bcrypt = require("bcryptjs");
@@ -40,6 +46,12 @@ module.exports = {
 
   /**
    * `SessionController.destroy()`
+   * @author David Tan
+   * @description Destroy session after logout
+   * @param {object} req
+   * @param {object} res
+   * @param {callback} next
+   * @returns {HTML} partial view from ejs
    */
   destroy: function (req, res, next) {
     req.session.authenticated = false;

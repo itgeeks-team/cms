@@ -1,3 +1,7 @@
+/**
+ * Event binding separated by component
+ * @class
+ **/
 var EventBinder = (function () {
   var components = {
     header : "header"
@@ -10,10 +14,10 @@ var EventBinder = (function () {
       Shared.validation("#sign-up form", Validator.signUpRules)
     });
     $(components.header).on("hidden.bs.modal", "#login", function (e) {
-      Shared.errorMessages("#login");
+      Shared.clearError("#login");
     });
     $(components.header).on("hidden.bs.modal", "#sign-up", function (e) {
-      Shared.errorMessages("#sign-up");
+      Shared.clearError("#sign-up");
     });
     $(components.header).on("submit", "#login form", function (e) {
       e.preventDefault();

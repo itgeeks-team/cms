@@ -32,8 +32,7 @@ var jsFilesToInject = [
     'js/inhouse/Shared.js',
     'js/inhouse/CustomValidator.js',
     'js/inhouse/Account.js',
-    'js/inhouse/EventBinder.js',
-    'js/shared.js'
+    'js/inhouse/EventBinder.js'
     // Controller should specify which js to load
 ];
 
