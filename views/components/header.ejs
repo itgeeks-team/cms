@@ -19,7 +19,7 @@
       </li>
     </ul>
     <% if (session.authenticated === true) { %>
-    <button type="button" class="btn btn-secondary align-self-center" role="logout-btn" data-user-id="1234">
+    <button type="button" class="btn btn-primary align-self-center" role="logout-btn" data-user-id="1234">
       <svg class="icon small" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
         <path d="M20.17 31.17L23 34l10-10-10-10-2.83 2.83L25.34 22H6v4h19.34l-5.17 5.17zM38 6H10c-2.21 0-4 1.79-4 4v8h4v-8h28v28H10v-8H6v8c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V10c0-2.21-1.79-4-4-4z"/>
       </svg>
@@ -27,7 +27,7 @@
     </button>
     <input type="hidden" name="_csrf" value="<%- _csrf %>">
     <% } else { %>
-    <button type="button" class="btn btn-secondary align-self-center" data-toggle="modal" data-target="#login">
+    <button type="button" class="btn btn-primary align-self-center" data-toggle="modal" data-target="#login">
       <svg class="icon small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <path d="M0 0h48v48h-48z" fill="none"/>
         <path d="M42 6.02h-36c-2.21 0-4 1.79-4 4v7.98h4v-8.02h36v28.06h-36v-8.04h-4v8.02c0 2.21 1.79 3.96 4 3.96h36c2.21 0 4-1.76 4-3.96v-28c0-2.21-1.79-4-4-4zm-20 25.98l8-8-8-8v6h-20v4h20v6z"/>
@@ -81,7 +81,7 @@
               <div class="popper-content" hidden></div>
             </div>
             <div class="d-flex flex-column">
-              <button type="submit" class="btn btn-secondary mb-3">Login</button>
+              <button type="submit" class="btn btn-primary mb-3">Login</button>
               <div class="align-self-center">Not a member yet? <a href="#sign-up" data-toggle="modal" data-dismiss="modal">Sign up now</a></div>
             </div>
             <input type="hidden" name="_csrf" value="<%- _csrf %>">
@@ -156,7 +156,7 @@
               <div class="popper-content" hidden></div>
             </div>
             <div class="d-flex flex-column">
-              <button type="submit" class="btn btn-secondary mb-3">Sign up</button>
+              <button type="submit" class="btn btn-primary mb-3">Sign up</button>
               <div class="align-self-center">Already is a member? <a href="#login" data-toggle="modal" data-dismiss="modal">Login here</a></div>
             </div>
             <input type="hidden" name="_csrf" value="<%- _csrf %>">
