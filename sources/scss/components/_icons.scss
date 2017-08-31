@@ -1,0 +1,9 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+
+  &.small {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -1,0 +1,12 @@
+.modal {
+  .modal-title {
+    text-transform: uppercase;
+  }
+  a {
+    color: $disabled-text-color-primary;
+    text-decoration: none;
+    &:hover {
+      color: darken($disabled-text-color-primary, 20%);
+    }
+  }
+}

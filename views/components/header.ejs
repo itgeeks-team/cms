@@ -1,0 +1,170 @@
+<nav class="navbar navbar-toggleable navbar-light bg-primary pt-0 pb-0">
+  <div class="d-flex">
+    <button class="navbar-toggler navbar-toggler-left align-self-center" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand pt-2 pb-2" href="#"><h2 class="mb-0">IT Geeks</h2></a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbar-content">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><span>Home</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><span>Threads</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><span>Projects</span></a>
+      </li>
+    </ul>
+    <% if (session.authenticated === true) { %>
+    <button type="button" class="btn btn-secondary align-self-center" role="logout-btn" data-user-id="1234">
+      <svg class="icon small" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <path d="M20.17 31.17L23 34l10-10-10-10-2.83 2.83L25.34 22H6v4h19.34l-5.17 5.17zM38 6H10c-2.21 0-4 1.79-4 4v8h4v-8h28v28H10v-8H6v8c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V10c0-2.21-1.79-4-4-4z"/>
+      </svg>
+      <span class="small">Logout</span>
+    </button>
+    <input type="hidden" name="_csrf" value="<%- _csrf %>">
+    <% } else { %>
+    <button type="button" class="btn btn-secondary align-self-center" data-toggle="modal" data-target="#login">
+      <svg class="icon small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <path d="M0 0h48v48h-48z" fill="none"/>
+        <path d="M42 6.02h-36c-2.21 0-4 1.79-4 4v7.98h4v-8.02h36v28.06h-36v-8.04h-4v8.02c0 2.21 1.79 3.96 4 3.96h36c2.21 0 4-1.76 4-3.96v-28c0-2.21-1.79-4-4-4zm-20 25.98l8-8-8-8v6h-20v4h20v6z"/>
+      </svg>
+      <span class="small">Login</span>
+    </button>
+    <% } %>
+  </div>
+</nav>
+
+<% if (session.authenticated !== true) { %>
+<!--START: LOGIN MODAL BOX-->
+<div class="modal" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" data-target="login" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <fieldset>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M24 11.8c2.32 0 4.2 1.88 4.2 4.2s-1.88 4.2-4.2 4.2-4.2-1.88-4.2-4.2 1.88-4.2 4.2-4.2m0 18c5.95 0 12.2 2.91 12.2 4.2v2.2h-24.4v-2.2c0-1.29 6.25-4.2 12.2-4.2m0-21.8c-4.42 0-8 3.58-8 8 0 4.41 3.58 8 8 8s8-3.59 8-8c0-4.42-3.58-8-8-8zm0 18c-5.33 0-16 2.67-16 8v6h32v-6c0-5.33-10.67-8-16-8z"/>
+                  <path d="M0 0h48v48h-48z" fill="none"/>
+                </svg>
+              </span>
+              <input type="text" name="username-or-email" class="form-control" placeholder="E.g. example123 / example@example.com" data-toggle="popover" data-placement="right" data-trigger="focus">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="form-group">
+              <span class="popper" data-toggle="popover" data-placement="left" data-trigger="hover">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M25.3 20c-1.65-4.66-6.08-8-11.3-8-6.63 0-12 5.37-12 12s5.37 12 12 12c5.22 0 9.65-3.34 11.3-8H34v8h8v-8h4v-8H25.3zM14 28c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                </svg>
+              </span>
+              <div class="popper-content" hidden>
+                <ul class="list-group">
+                  <li class="list-group-item"><b>Requirements:</b></li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Morbi leo risus</li>
+                  <li class="list-group-item">Porta ac consectetur ac</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+              </div>
+              <input type="password" name="password" class="form-control" placeholder="Password" data-toggle="popover" data-placement="right" data-trigger="focus">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="d-flex flex-column">
+              <button type="submit" class="btn btn-secondary mb-3">Login</button>
+              <div class="align-self-center">Not a member yet? <a href="#sign-up" data-toggle="modal" data-dismiss="modal">Sign up now</a></div>
+            </div>
+            <input type="hidden" name="_csrf" value="<%- _csrf %>">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END: LOGIN MODAL BOX-->
+
+<!--START: SIGN UP MODAL BOX-->
+<div class="modal" id="sign-up" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" data-target="sign-up" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <fieldset>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M0 0h48v48h-48zm0 0h48v48h-48zm0 0h48v48h-48z" fill="none"/>
+                  <path d="M40 0h-32v4h32v-4zm-32 48h32v-4h-32v4zm32-40h-32c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4v-24c0-2.21-1.79-4-4-4zm-16 5.5c2.48 0 4.5 2.02 4.5 4.5 0 2.49-2.02 4.5-4.5 4.5s-4.5-2.01-4.5-4.5c0-2.48 2.02-4.5 4.5-4.5zm10 20.5h-20v-3c0-3.33 6.67-5 10-5s10 1.67 10 5v3z"/>
+                </svg>
+              </span>
+              <input type="text" name="display-name" class="form-control" data-toggle="popover" data-placement="right" data-trigger="focus" placeholder="E.g. Bruce Lee">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M24 11.8c2.32 0 4.2 1.88 4.2 4.2s-1.88 4.2-4.2 4.2-4.2-1.88-4.2-4.2 1.88-4.2 4.2-4.2m0 18c5.95 0 12.2 2.91 12.2 4.2v2.2h-24.4v-2.2c0-1.29 6.25-4.2 12.2-4.2m0-21.8c-4.42 0-8 3.58-8 8 0 4.41 3.58 8 8 8s8-3.59 8-8c0-4.42-3.58-8-8-8zm0 18c-5.33 0-16 2.67-16 8v6h32v-6c0-5.33-10.67-8-16-8z"/>
+                  <path d="M0 0h48v48h-48z" fill="none"/>
+                </svg>
+              </span>
+              <input type="text" name="username" class="form-control" data-toggle="popover" data-placement="right" data-trigger="focus" placeholder="E.g. brucelee123">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M0 0h48v48h-48z" fill="none"/>
+                  <path d="M42 16v-2l-6 4-6-4v2l6 4 6-4zm2-10h-40c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h40c2.21 0 3.98-1.79 3.98-4l.02-28c0-2.21-1.79-4-4-4zm-28 6c3.31 0 6 2.69 6 6 0 3.32-2.69 6-6 6s-6-2.68-6-6c0-3.31 2.69-6 6-6zm12 24h-24v-2c0-4 8-6.2 12-6.2s12 2.2 12 6.2v2zm16-12h-16v-12h16v12z"/>
+                  <path d="M0 0h48v48h-48z" fill="none"/>
+                </svg>
+              </span>
+              <input type="text" name="email" class="form-control" data-toggle="popover" data-placement="right" data-trigger="focus" placeholder="E.g. brucelee@example.com">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M25.3 20c-1.65-4.66-6.08-8-11.3-8-6.63 0-12 5.37-12 12s5.37 12 12 12c5.22 0 9.65-3.34 11.3-8H34v8h8v-8h4v-8H25.3zM14 28c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                </svg>
+              </span>
+              <input type="password" id="password" name="password" class="form-control" data-toggle="popover" data-placement="right" data-trigger="focus" placeholder="Password">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="form-group">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                  <path d="M25.3 20c-1.65-4.66-6.08-8-11.3-8-6.63 0-12 5.37-12 12s5.37 12 12 12c5.22 0 9.65-3.34 11.3-8H34v8h8v-8h4v-8H25.3zM14 28c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                </svg>
+              </span>
+              <input type="password" id="password-confirm" name="password-confirm" class="form-control" data-toggle="popover" data-placement="right" data-trigger="focus" placeholder="Password confirmation">
+              <div class="popper-content" hidden></div>
+            </div>
+            <div class="d-flex flex-column">
+              <button type="submit" class="btn btn-secondary mb-3">Sign up</button>
+              <div class="align-self-center">Already is a member? <a href="#login" data-toggle="modal" data-dismiss="modal">Login here</a></div>
+            </div>
+            <input type="hidden" name="_csrf" value="<%- _csrf %>">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END: SIGN UP MODAL BOX-->
+<% } %>

@@ -1,12 +1,25 @@
-// Contextual backgrounds
+@mixin show-line($position : "top-left", $top : 0, $right : 0, $bottom : 0, $left : 0) {
+  content: "";
+  position: absolute;
+  @if $position == "top-left" {
+    top: $top;
+    left: $left;
+  } @else if $position == "bottom-right" {
+    bottom: $bottom;
+    right: $right;
+  }
+}
 
-@mixin bg-variant($parent, $color) {
-  #{$parent} {
-    background-color: $color !important;
+@mixin set-font($family : "", $style : "normal", $weight : "normal", $render : "optimizeLegibility") {
+  font-family: LatoWeb#{$family}, Arial, sans-serif;
+  font-style: #{$style};
+  font-weight: #{$weight};
+  text-rendering: #{$render};
+}
+
+@mixin set-prefix($property: "transition", $value: ".5s ease-in-out 0s") {
+  @each $prefix, $preValue in $prefixes {
+    #{$preValue}#{$property}: #{$value};
   }
-  a#{$parent} {
-    @include hover-focus {
-      background-color: darken($color, 10%) !important;
-    }
-  }
+  #{$property}: #{$value};
 }

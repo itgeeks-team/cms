@@ -37,7 +37,6 @@
 =            (Shared for all pages)           =
 =============================================*/
 @import
-  "base/background",
   "base/reset",
   "base/typography",
   "base/shared";
@@ -61,6 +60,8 @@
 =            5th.Component Styles             =
 =============================================*/
 @import
+  "components/modal",
+  "components/icons",
   "components/buttons",
   "components/dropdown",
   "components/navbar",

@@ -1,71 +1,54 @@
 .navbar {
-  border-bottom: 1px solid $light-cyan;
-}
+  @include set-prefix("box-shadow", "0px 1px 15px -1px #{$shadow-color-primary}");
+  #navbar-content {
+    align-self: stretch;
+  }
 
-.navbar-nav {
-  flex: 4;
-}
+  .navbar-nav {
+    flex: 4;
+  }
 
-.navbar-toggler-left {
-  position: static;
-  margin-right: 1rem;
-}
+  .navbar-toggler-left {
+    position: static;
+    margin-right: 1rem;
+  }
 
-.navbar-brand {
-  flex: 2;
-}
-// .navbar-toggleable {
-//   @each $breakpoint in map-keys($grid-breakpoints) {
-//     $next: breakpoint-next($breakpoint, $grid-breakpoints);
-//     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  .navbar-brand {
+    flex: 2;
+  }
 
-//     &#{$infix} {
-//       @include media-breakpoint-down($breakpoint) {
-//         .navbar-nav {
-//           .dropdown-menu {
-//             position: static;
-//             float: none;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+  .nav-item {
+    position: relative;
+    &:hover {
+      &:after{
+        @include show-line("bottom-right");
+        height: 2px;
+        width: 100%;
+        background: $color-primary;
+      }
+    }
+    &.active {
+      .nav-link {
+        color: $selected-color-primary;
+        background-color: $color-primary;
+      }
+      &:hover {
+        &:after{
+          @include show-line("bottom-right");
+        }
+      }
+    }
 
-svg {
-  display: inline-block;
-}
-
-.nav-item {
-  position: relative;
-  &:hover {
-    &:after{
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 2px;
-      width: 100%;
-      background: $light-cyan;
+    & > .nav-link {
+      display: table;
+      height: 100%;
+      & > span {
+        display: table-cell;
+        vertical-align: middle;
+      }
     }
   }
-}
-.nav-item.active {
-  .nav-link {
-    color: $grey-white !important;
-    background-color: $light-cyan;
-  }
-  &:hover {
-    &:after{
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-  }
-}
 
-.navbar {
   form[role=search] {
     flex: 1;
     & .form-item {
@@ -79,30 +62,28 @@ svg {
   }
 
   input[role=search] {
+    @include set-font();
     font-size: 0.9rem !important;
-    font-family: inherit;
-    font-weight: normal;
-    color: $grey-white;
+    color: $disabled-text-color-primary;
     position: relative;
     border: 0px;
     border-radius: 0px;
     width: 30%;
     height: 100%;
-    background-color: $grey-white;
-    border: 0px solid $grey-dark;
-    transition: width .5s linear;
+    background-color: $selected-color-primary;
+    border: 0px solid $active-text-color-primary;
+    @include set-prefix("transition", "width .5s linear");
     &:focus {
-      border-bottom: 1px solid $light-cyan;
-      color: $grey-dark;
+      border-bottom: 1px solid $color-primary;
+      color: $active-text-color-primary;
       width: 100%;
       &::-webkit-input-placeholder {
-        color: $grey-dark;
+        color: $active-text-color-primary;
       }
     }
     &::-webkit-input-placeholder {
-      font-family: LatoWebLight, Arial, sans-serif;
-      font-style: italic;
-      color: $grey;
+      @include set-font("Light", "italic");
+      color: $disabled-text-color-primary;
     }
   }
 
@@ -110,9 +91,9 @@ svg {
     height: 100%;
     border: 0px;
     border-radius: 0px;
-    background-color: $grey-white;
+    background-color: $selected-color-primary;
     & svg:hover {
-      fill: $light-cyan;
+      fill: $color-primary;
     }
   }
 }
