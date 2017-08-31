@@ -36,7 +36,6 @@ module.exports.routes = {
     view: "static/index",
     locals: {
       title : "Home",
-      layout: "layouts/main"
     }
   },
 
