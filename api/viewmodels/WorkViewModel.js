@@ -11,4 +11,8 @@
     this.cmSettings = {};
 
     this.tidySettings = {};
+
+    this.setting = {
+        scripts = []
+    };
 }
