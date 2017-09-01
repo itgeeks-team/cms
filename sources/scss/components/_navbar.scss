@@ -1,6 +1,6 @@
 .navbar {
-  background-color: $bg-color-primary !important;
-  @include set-prefix("box-shadow", "0px 1px 15px -1px #{$shadow-color-primary}");
+  background-color: $navbar-bg-color !important;
+  @include set-prefix("box-shadow", "0px 1px 15px -1px #{$navbar-shadow-color}");
   #navbar-content {
     align-self: stretch;
   }
@@ -18,34 +18,25 @@
     flex: 2;
   }
 
-  .nav-item {
-    position: relative;
-    &:hover {
-      &:after{
-        @include show-line("bottom-right");
-        height: 2px;
-        width: 100%;
-        background: $color-primary;
-      }
-    }
-    &.active {
-      .nav-link {
-        color: $selected-color-primary;
-        background-color: $color-primary;
-      }
+  .nav-pills {
+    .nav-item {
+      position: relative;
       &:hover {
         &:after{
           @include show-line("bottom-right");
+          height: 2px;
+          width: 100%;
+          background: $btn-primary-bg;
         }
       }
-    }
-
-    & > .nav-link {
-      display: table;
-      height: 100%;
-      & > span {
-        display: table-cell;
-        vertical-align: middle;
+      & > .nav-link {
+        display: table;
+        height: 100%;
+        border-radius: 0;
+        & > span {
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
     }
   }
@@ -65,36 +56,18 @@
   input[role=search] {
     @include set-font();
     font-size: 0.9rem !important;
-    color: $disabled-text-color-primary;
     position: relative;
     border: 0px;
     border-radius: 0px;
     width: 30%;
     height: 100%;
-    background-color: $selected-color-primary;
-    border: 0px solid $active-text-color-primary;
     @include set-prefix("transition", "width .5s linear");
     &:focus {
-      border-bottom: 1px solid $color-primary;
-      color: $active-text-color-primary;
+      border-bottom: 1px solid $border-color-primary;
       width: 100%;
-      &::-webkit-input-placeholder {
-        color: $active-text-color-primary;
-      }
     }
     &::-webkit-input-placeholder {
       @include set-font("Light", "italic");
-      color: $disabled-text-color-primary;
-    }
-  }
-
-  button[role=search] {
-    height: 100%;
-    border: 0px;
-    border-radius: 0px;
-    background-color: $selected-color-primary;
-    & svg:hover {
-      fill: $color-primary;
     }
   }
 }

@@ -7,7 +7,7 @@ input {
   }
 
   &.error {
-    border-color: $alert-color-primary;
+    border-color: $input-error-border-color;
   }
 }
 
