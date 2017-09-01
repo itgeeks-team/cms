@@ -1,4 +1,4 @@
-// scripts:     List of js files to load that is relevant to this module
+﻿// scripts:     List of js files to load that is relevant to this module
 // styles:      List of css files to load that is relevant to this module
 // title:       title of the window tab
 
@@ -20,7 +20,7 @@ var vm = {
 };
 
 module.exports = {
-    work: function(req, res) {
+    index: function(req, res) {
 		return res.view(vm);
 	}
 };

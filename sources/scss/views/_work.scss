@@ -1,14 +1,18 @@
-.work-output {
-    width: 100%;
-    height: 100%;
-    border: none;
+﻿.work-output {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .work-menu {
-    left: initial; /*position to right*/
-    opacity: .4;
+  left: initial; /*position to right*/
+  opacity: .4;
 }
 
 .work-menu:hover {
-    opacity: 1;
+  opacity: 1;
+}
+
+.work-menu-settings-modal .modal-header {
+  padding: 0;
 }
