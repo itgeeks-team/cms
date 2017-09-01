@@ -3,10 +3,10 @@
     text-transform: uppercase;
   }
   a {
-    color: $disabled-text-color-primary;
+    color: $modal-link-color;
     text-decoration: none;
     &:hover {
-      color: darken($disabled-text-color-primary, 20%);
+      color: darken($modal-link-color, 20%);
     }
   }
 }

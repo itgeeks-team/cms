@@ -1,3 +1,14 @@
+/*=================================================================================
+
+  OUR OWN VARIABLES SECTION
+
+  ===============================================================================*/
+$prefixes : (
+  webkit : "-webkit-",
+  moz    : "-moz-",
+  o      : "-o-"
+);
+
 $dark       : #212121;
 $grey       : #BDBDBD;
 $grey-white : #FAFAFA;
@@ -5,22 +16,25 @@ $white      : #FFFFFF;
 $light-cyan : #26C6DA;
 $red        : #F44336;
 
-$color-primary               : $light-cyan;
-$bg-color-primary            : $grey-white;
-$selected-color-primary      : $white;
-$active-text-color-primary   : $dark;
-$disabled-text-color-primary : $grey;
-$shadow-color-primary        : $grey;
-$alert-color-primary         : $red;
+$danger-color-primary : $red;
+$border-color-primary : $light-cyan;
+$bg-color-primary     : $grey-white;
+$link-color-primary   : $grey;
+$shadow-color-primary : $grey;
 
+$navbar-bg-color     : $bg-color-primary;
+$navbar-shadow-color : $shadow-color-primary;
 
-// Bootstrap variable override
-$nav-tabs-active-link-hover-color : $bg-color-primary;
-$btn-secondary-border             : $color-primary;
+$nav-item-hover-underline-bg : $border-color-primary;
+
+$input-error-border-color : $danger-color-primary;
+
+$modal-link-color : $link-color-primary;
+
+/*=================================================================================
+
+  BOOTSTRAP CUSTOMIZATION SECTION
+
+  ===============================================================================*/
+$btn-secondary-border             : $border-color-primary;
 $btn-secondary-bg                 : $bg-color-primary;
-
-$prefixes : (
-  webkit : "-webkit-",
-  moz    : "-moz-",
-  o      : "-o-"
-);
