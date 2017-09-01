@@ -1,7 +1,17 @@
+<!--
+  Common view model properties:
+    scripts:      List of js files to load that is relevant to this module
+    styles:       List of css files to load that is relevant to this module
+    title:        Title of the browser tab
+    hideHeader:   Indicates whether to hide the header or not, default is false
+-->
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <% if (typeof vm !== "undefined") { %>
+      <title><%= vm.title %></title>
+    <% } %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!--STYLES-->
@@ -9,16 +19,21 @@
     <!--STYLES END-->
 
     <!--Additional styles-->
-    <% if (typeof styles !== "undefined") { %>
-        <% for (var i = 0; i < styles.length; i++) { %>
-        <link rel="stylesheet" href="/styles/<%= styles[i] %>.css" />
+    <% if (typeof vm !== "undefined") { %>
+        <% for (var i = 0; i < vm.styles.length; i++) { %>
+        <link rel="stylesheet" href="/styles/<%= vm.styles[i] %>.css" />
         <% } %>
     <% } %>
   </head>
 
   <body>
-    <%- partial('components/header.ejs') %>
-    <%- body %>
+    <% if (typeof vm === "undefined" || vm.hideHeader === false) { %>
+      <%- partial('components/header.ejs') %>
+    <% } %>
+
+    <div class="container-fluid">
+      <%- body %>
+    </div>
 
     <!--TEMPLATES-->
     
@@ -42,10 +57,17 @@
     <script src="/js/inhouse/EventBinder.js"></script>
     <!--SCRIPTS END-->
 
+    <!--Copy view model into client side-->
+    <% if (typeof vm !== "undefined") { %>
+      <script>
+        window.vm = JSON.parse('<%- JSON.stringify(vm) %>');
+      </script>
+    <% } %>
+
     <!--Additional scripts-->
-    <% if (typeof scripts !== "undefined") { %>
-        <% for (var i = 0; i < scripts.length; i++) { %>
-            <script src="/js/<%= scripts[i] %>.js"></script>
+    <% if (typeof vm !== "undefined") { %>
+        <% for (var i = 0; i < vm.scripts.length; i++) { %>
+            <script src="/js/<%= vm.scripts[i] %>.js"></script>
         <% } %>
     <% } %>
   </body>

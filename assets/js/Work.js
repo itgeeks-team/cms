@@ -1,31 +1,18 @@
 ﻿var Work = (function() {
-
-    // Default settings
-    var defaultHtml = "<html><head></head><body><p>Sample HTML</p><input class=\"btn\" type=\"button\" value=\"Click Me\" /></body></html>";
-    var defaultCss = "p {background-color: teal;}";
-    var defaultJs = "$(\".btn\").click(function() {alert(\"Hello!\");});";
-    var sharedSettings = {
-        tabSize: 3,
-        indentUnit: 3,
-        indentWithTabs: true,
-        lineNumbers: true,
-        styleActiveLine: true
-    };
-
     // Init code mirrors
     var htmlCm = CodeMirror($(".work-html")[0], {
-        value: defaultHtml,
+        value: vm.htmlContent,
         mode: "htmlmixed",
     });
     var cssCm = CodeMirror($(".work-css")[0], {
-        value: defaultCss,
+        value: vm.cssContent,
         mode: "css",
     });
     var jsCm = CodeMirror($(".work-js")[0], {
-        value: defaultJs,
+        value: vm.jsContent,
         mode: "javascript",
     });
-    $.each(sharedSettings, function(key, val) {
+    $.each(vm.cmSettings, function(key, val) {
         htmlCm.setOption(key, val);
         cssCm.setOption(key, val);
         jsCm.setOption(key, val);
@@ -40,7 +27,7 @@
         outputDoc.write(htmlCm.getValue());
 
         // TODO: Allow user to select script files to load
-
+        
 
         // Insert css
         $("<style>").html(cssCm.getValue()).appendTo($(outputDoc).find("head"));
@@ -53,18 +40,13 @@
 
     // Tidy up all 3 editors
     var tidy = function() {
-        // js-beautify settings
-        var settings = {
-            indent_size: sharedSettings.tabSize
-        };
-
-        var beautifiedHtml = html_beautify(htmlCm.getValue(), settings);
+        var beautifiedHtml = html_beautify(htmlCm.getValue(), vm.tidySettings);
         htmlCm.setValue(beautifiedHtml);
 
-        var beautifiedCss = css_beautify(cssCm.getValue(), settings);
+        var beautifiedCss = css_beautify(cssCm.getValue(), vm.tidySettings);
         cssCm.setValue(beautifiedCss);
 
-        var beautifiedJs = js_beautify(jsCm.getValue(), settings);
+        var beautifiedJs = js_beautify(jsCm.getValue(), vm.tidySettings);
         jsCm.setValue(beautifiedJs);
     }
 
@@ -83,5 +65,5 @@ $(".work-menu-run").click(Work.run);
 $(".work-menu-tidy").click(Work.tidy);
 
 // Run
-//Work.tidy();
-//Work.run();
+Work.tidy();
+Work.run();

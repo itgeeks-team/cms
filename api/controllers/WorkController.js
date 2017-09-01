@@ -1,11 +1,12 @@
-﻿// scripts:     List of js files to load that is relevant to this module
-// styles:      List of css files to load that is relevant to this module
-// title:       title of the window tab
+﻿var WorkViewModel = require("../viewmodels/WorkViewModel");
 
-var vm = {
-    title: "Work",
+// Business Logic
+function initVm() {
+    var vm = new WorkViewModel();
 
-    scripts: [
+    vm.title = "Work";
+
+    vm.scripts = [
         "codemirror/codemirror",
         "codemirror/mode/xml",
         "codemirror/mode/css",
@@ -16,11 +17,41 @@ var vm = {
         "js-beautify/beautify-css.min",
         "js-beautify/beautify-html.min",
         "work"
-    ]
-};
+    ];
+
+    vm.hideHeader = true;
+
+    vm.htmlContent =
+        "<html>" +
+        "<head></head>" +
+        "<body>" +
+        "<p>Sample HTML</p>\\n" +
+        '<input class=\\"btn\\" type=\\"button\\" value=\\"Click Me\\" />\\n' +
+        "</body >" +
+        "</html>";
+
+    vm.cssContent = "p {background-color: cyan;}";
+
+    vm.jsContent = '$(\\".btn\\").click(function() {alert(\\"Hello!\\");});';
+
+    vm.cmSettings = {
+        tabSize: 3,
+        indentUnit: 3,
+        indentWithTabs: true,
+        lineNumbers: true,
+        styleActiveLine: true
+    };
+
+    vm.tidySettings = {
+        indent_size: vm.cmSettings.tabSize
+    };
+
+    return vm;
+}
 
 module.exports = {
     index: function(req, res) {
-		return res.view(vm);
-	}
+        var vm = initVm();
+        return res.view({ vm });
+    }
 };
