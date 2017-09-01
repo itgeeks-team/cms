@@ -28,7 +28,9 @@
 
   <body>
     <% if (typeof vm === "undefined" || vm.hideHeader === false) { %>
+      <header>
       <%- partial('components/header.ejs') %>
+      </header>
     <% } %>
 
     <div class="container-fluid">
@@ -36,7 +38,7 @@
     </div>
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
     <!--LIVERELOAD CHROME PLUGIN-->
