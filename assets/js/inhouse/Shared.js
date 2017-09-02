@@ -110,3 +110,13 @@ $("form").submit(function(e) {
     $(this).append("<input type='hidden' name='_csrf' value='{0}' />".format(_csrf));
     return true;
 });
+
+// Ajax setup
+//
+$.ajaxSetup({
+    // Append csrf to send data before sending
+    beforeSend: function(jqXHR, settings) {
+        settings.data += "&_csrf={0}".format(window._csrf);
+        return true;
+    }
+});

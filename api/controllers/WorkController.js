@@ -5,7 +5,7 @@
     },
 
     save: function(req, res) {
-        sails.log.info(req.url);
-        return res.send(200);
+        sails.log.info(req.body);
+        return res.send(req.body);
     }
 };

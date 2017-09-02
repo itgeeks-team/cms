@@ -52,15 +52,17 @@
 
     // Save this work
     function saveWork() {
-        $.post("work/save", { data: "HIIII", _csrf: _csrf }, function(res) {
-            alert("EASY");
+        var data = {
+            htmlContent: htmlCm.getValue(),
+            cssContent: cssCm.getValue(),
+            jsContent: jsCm.getValue()
+        };
+        $.post("work/save", { data: "HIIII" }, function(res) {
+            console.log(res);
         });
     }
 
     return {
-        htmlCm: htmlCm,
-        cssCm: cssCm,
-        jsCm: jsCm,
         run: run,
         tidy: tidy,
         saveWork: saveWork
