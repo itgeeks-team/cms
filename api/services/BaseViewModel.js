@@ -10,4 +10,7 @@ module.exports = function() {
 
     // Indicates whether to hide the header or not
     this.hideHeader = false;
+
+    // List of errors to show to users (if any)
+    this.errors = [];
 };

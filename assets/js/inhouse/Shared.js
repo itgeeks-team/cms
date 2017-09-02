@@ -1,5 +1,12 @@
 ﻿var SITE_URL = location.protocol + "//" + location.host;
 
+// Get server data
+//
+window._vm = JSON.parse($("#hdnVm").val());
+window._csrf = $("#hdnCsrf").val();
+$("#hdnVm").remove();
+$("#hdnCsrf").remove();
+
 // Extension methods
 //
 if (!String.prototype.format) {
@@ -82,16 +89,25 @@ window.Shared = (function() {
     /**
      * Prompt user's confirmation before calling a function
      * @example
-     * var saveMyWork = function() { };
-     * $("#btn-save-my-work").click(function() {
-     *     Shared.confirm(saveMyWork);
+     * var saveWork = function(isTemplate, overwriteIfExist) {
+     *    if (asTemplate) {
+     *        if (overwriteIfExist) {
+     *        }
+     *    }
+     *    else {
+     *    }
+     * };
+     * $("#btn-save-work").click(function() {
+     *     Shared.confirm(saveWork, true, false);
      * });
-     * @param {function} function to call if the user confirms to proceed
+     * @param {function} callback to call if the user confirms to proceed
+     * @param {multiple} parameters to be passed to callback
      * @returns {void}
      **/
-    var confirm = function(callback) {
+    var confirm = function(cb /*indefinite params*/) {
         if (window.confirm("Are you sure to proceed?")) {
-            callback();
+            var args = Array.prototype.slice.call(arguments, 1);
+            cb.apply(this, args);
         }
     };
 

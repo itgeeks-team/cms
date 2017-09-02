@@ -27,7 +27,7 @@
         outputDoc.write(htmlCm.getValue());
 
         // TODO: Allow user to select script files to load
-        
+
 
         // Insert css
         $("<style>").html(cssCm.getValue()).appendTo($(outputDoc).find("head"));
@@ -51,18 +51,27 @@
     }
 
     // Save this work
-    function saveWork() {
+    function saveWork(asTemplate) {
         var data = {
             htmlContent: htmlCm.getValue(),
             cssContent: cssCm.getValue(),
             jsContent: jsCm.getValue()
         };
-        $.post("work/save", { data: "HIIII" }, function(res) {
+
+        var url = (asTemplate) ? "work/saveTemplate" : "work/saveWork";
+
+        $.post(url, data, function(res) {
             console.log(res);
         });
     }
 
     return {
+        // Fields
+        htmlCm: htmlCm,
+        cssCm: cssCm,
+        jsCm: jsCm,
+
+        // Methods
         run: run,
         tidy: tidy,
         saveWork: saveWork
@@ -72,10 +81,16 @@
 
 // Events
 //
-$(".work-menu-run").click(Work.run);
-$(".work-menu-tidy").click(Work.tidy);
-$(".work-settings-modal-save-work").click(function() {
-    Shared.confirm(Work.saveWork);
+$(".work-run").click(Work.run);
+
+$(".work-tidy").click(Work.tidy);
+
+$(".work-save-template").click(function() {
+    Shared.confirm(Work.saveWork, true);
+});
+
+$(".work-save-work").click(function() {
+    Shared.confirm(Work.saveWork, false);
 });
 
 // Run

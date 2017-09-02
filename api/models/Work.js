@@ -15,6 +15,9 @@ module.exports = {
         },
         scriptChoices: {
             type: 'json'
+        },
+        isTemplate: {
+            type: "boolean"
         }
     }
 };

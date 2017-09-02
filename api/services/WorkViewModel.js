@@ -11,6 +11,21 @@ function ScriptChoice(scriptName = "", scriptPath = "", selected = false) {
 function WorkViewModel() {
     BaseViewModel.call(this);
 
+    this.scripts = [
+        "codemirror/codemirror",
+        "codemirror/mode/xml",
+        "codemirror/mode/css",
+        "codemirror/mode/javascript",
+        "codemirror/mode/htmlmixed",
+        "codemirror/addon/active-line",
+        "js-beautify/beautify.min",
+        "js-beautify/beautify-css.min",
+        "js-beautify/beautify-html.min",
+        "work"
+    ];
+
+    this.hideHeader = true;
+
     this.htmlContent = "";
 
     this.cssContent = "";
@@ -28,38 +43,25 @@ function WorkViewModel() {
 
 // Static methods
 //
-WorkViewModel.getDefault = function() {
+WorkViewModel.new = function() {
     var vm = new WorkViewModel();
 
-    vm.title = "Work";
+    // Get 
 
-    vm.scripts = [
-        "codemirror/codemirror",
-        "codemirror/mode/xml",
-        "codemirror/mode/css",
-        "codemirror/mode/javascript",
-        "codemirror/mode/htmlmixed",
-        "codemirror/addon/active-line",
-        "js-beautify/beautify.min",
-        "js-beautify/beautify-css.min",
-        "js-beautify/beautify-html.min",
-        "work"
-    ];
+    vm.title = "Work - New";
 
-    vm.hideHeader = true;
-
-    vm.htmlContent =
+    vm.htmlContent = 
         "<html>" +
         "<head></head>" +
         "<body>" +
-        "<p>Sample HTML</p>\\n" +
-        '<input class=\\"btn\\" type=\\"button\\" value=\\"Click Me\\" />\\n' +
+        "<p>Sample HTML</p>\n" +
+        "<input class=\"btn\" type=\"button\" value=\"Click Me\" />\n" +
         "</body >" +
         "</html>";
 
     vm.cssContent = "p {background-color: cyan;}";
 
-    vm.jsContent = '$(\\".btn\\").click(function() {alert(\\"Hello!\\");});';
+    vm.jsContent = "$('.btn').click(function() {alert(\"He\\l\t'l''o!\");});";
 
     vm.cmSettings = {
         tabSize: 3,

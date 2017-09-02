@@ -3,16 +3,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>
-      // Copy view model into client side
-      <% if (typeof vm !== "undefined") { %>
-        window._vm = JSON.parse('<%- JSON.stringify(vm) %>');
-      <% } %>
-
-      // Copy csrf token into client side
-      window._csrf = "<%= _csrf %>";
-    </script>
-
     <% if (typeof vm !== "undefined") { %>
       <title><%= vm.title %></title>
     <% } %>
@@ -24,6 +14,12 @@
   </head>
 
   <body>
+    <% if (typeof vm !== "undefined") { %>
+    <input id="hdnVm" type="hidden" value="<%= JSON.stringify(vm) %>" />
+    <% } %>
+
+    <input id="hdnCsrf" type="hidden" value="<%= _csrf %>" />
+
     <% if (typeof vm === "undefined" || vm.hideHeader === false) { %>
       <header>
       <%- partial('components/header.ejs') %>
