@@ -1,18 +1,18 @@
-﻿var Work = (function() {
+﻿window.Work = (function() {
     // Init code mirrors
     var htmlCm = CodeMirror($(".work-html")[0], {
-        value: vm.htmlContent,
+        value: _vm.htmlContent,
         mode: "htmlmixed",
     });
     var cssCm = CodeMirror($(".work-css")[0], {
-        value: vm.cssContent,
+        value: _vm.cssContent,
         mode: "css",
     });
     var jsCm = CodeMirror($(".work-js")[0], {
-        value: vm.jsContent,
+        value: _vm.jsContent,
         mode: "javascript",
     });
-    $.each(vm.cmSettings, function(key, val) {
+    $.each(_vm.cmSettings, function(key, val) {
         htmlCm.setOption(key, val);
         cssCm.setOption(key, val);
         jsCm.setOption(key, val);
@@ -39,15 +39,22 @@
     }
 
     // Tidy up all 3 editors
-    var tidy = function() {
-        var beautifiedHtml = html_beautify(htmlCm.getValue(), vm.tidySettings);
+    function tidy() {
+        var beautifiedHtml = html_beautify(htmlCm.getValue(), _vm.tidySettings);
         htmlCm.setValue(beautifiedHtml);
 
-        var beautifiedCss = css_beautify(cssCm.getValue(), vm.tidySettings);
+        var beautifiedCss = css_beautify(cssCm.getValue(), _vm.tidySettings);
         cssCm.setValue(beautifiedCss);
 
-        var beautifiedJs = js_beautify(jsCm.getValue(), vm.tidySettings);
+        var beautifiedJs = js_beautify(jsCm.getValue(), _vm.tidySettings);
         jsCm.setValue(beautifiedJs);
+    }
+
+    // Save this work
+    function saveWork() {
+        $.post("work/save", { data: "HIIII", _csrf: _csrf }, function(res) {
+            alert("EASY");
+        });
     }
 
     return {
@@ -55,15 +62,21 @@
         cssCm: cssCm,
         jsCm: jsCm,
         run: run,
-        tidy: tidy
+        tidy: tidy,
+        saveWork: saveWork
     };
 
 })();
 
-// Event handlers
+// Events
+//
 $(".work-menu-run").click(Work.run);
 $(".work-menu-tidy").click(Work.tidy);
+$(".work-settings-modal-save-work").click(function() {
+    Shared.confirm(Work.saveWork);
+});
 
 // Run
+//
 Work.tidy();
 Work.run();

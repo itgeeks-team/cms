@@ -1,14 +1,18 @@
-<!--
-  Common view model properties:
-    scripts:      List of js files to load that is relevant to this module
-    styles:       List of css files to load that is relevant to this module
-    title:        Title of the browser tab
-    hideHeader:   Indicates whether to hide the header or not, default is false
--->
+<!--Refer to /api/services/BaseViewModel.js for common view model properties that are used in this layout-->
 
 <!DOCTYPE html>
 <html>
   <head>
+    <script>
+      // Copy view model into client side
+      <% if (typeof vm !== "undefined") { %>
+        window._vm = JSON.parse('<%- JSON.stringify(vm) %>');
+      <% } %>
+
+      // Copy csrf token into client side
+      window._csrf = "<%= _csrf %>";
+    </script>
+
     <% if (typeof vm !== "undefined") { %>
       <title><%= vm.title %></title>
     <% } %>
@@ -17,13 +21,6 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/app.css">
     <!--STYLES END-->
-
-    <!--Additional styles-->
-    <% if (typeof vm !== "undefined") { %>
-        <% for (var i = 0; i < vm.styles.length; i++) { %>
-        <link rel="stylesheet" href="/styles/<%= vm.styles[i] %>.css" />
-        <% } %>
-    <% } %>
   </head>
 
   <body>
@@ -38,7 +35,7 @@
     </div>
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
     <!--LIVERELOAD CHROME PLUGIN-->
@@ -58,13 +55,6 @@
     <script src="/js/inhouse/Account.js"></script>
     <script src="/js/inhouse/EventBinder.js"></script>
     <!--SCRIPTS END-->
-
-    <!--Copy view model into client side-->
-    <% if (typeof vm !== "undefined") { %>
-      <script>
-        window.vm = JSON.parse('<%- JSON.stringify(vm) %>');
-      </script>
-    <% } %>
 
     <!--Additional scripts-->
     <% if (typeof vm !== "undefined") { %>
