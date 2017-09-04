@@ -60,8 +60,8 @@
 
         var url = (asTemplate) ? "work/saveTemplate" : "work/saveWork";
 
-        $.post(url, data, function(res) {
-            console.log(res);
+		$.post(url, data, function (res) {
+			Shared.showResponse(res);
         });
     }
 

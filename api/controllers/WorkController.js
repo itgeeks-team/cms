@@ -1,36 +1,65 @@
 ﻿module.exports = {
-    index: function(req, res) {
-        var vm = WorkViewModel.new();
-        return res.view({ vm });
+    // View actions
+    //
+    index: function (req, res) {
+		return WorkView.index(res);
     },
 
-    saveTemplate: function(req, res) {
-        //Work.find({ isTemplate: true }).exec(function(err, templateWorks) {
-        //    if (err) {
-        //        return res.serverError(err);
-        //    }
 
-        //    // If template not found, create new
-        //    if (!templateWorks.length) {
-        //        var criteria = req.body;
-        //        criteria.isTemplate = true;
-        //        Work.create(criteria).exec(function(err, newWorks) {
-        //            return res.send(req.body);
-        //        });
-        //    }
-        //    // Update existing
-        //    else {
-        //        Work.update(
-        //    }
-        //});
 
-        ModelService.findOrCreate(Work, { isTemplate: true }, null, function(err, createdOrFoundRecords, isFound) {
-            sails.log.info(isFound);
-        });
+    // AJAX actions
+    //
+    // Save template
+	saveTemplate: function (req, res) {
+        // The response to be sent back to client
+		var response = new Response(res);
+
+        // Find criteria
+		var findCriteria = { isTemplate: true };
+
+        // Create criteria
+        var createCriteria = req.body;
+        createCriteria.isTemplate = true;
+
+        // Find all templates
+		Work.find(findCriteria)
+			.then(function (found) {
+                // If not found
+				if (!found.length) {
+					return Work.create(createCriteria);
+				}
+				// If found more than one, destroy excess (keep only the first one) and update the first one
+				else if (found.length > 1) {
+					var destroyCriteria = findCriteria;
+					destroyCriteria.id = { "!": found[0].id };
+					return [Work.update(found[0], createCriteria), Work.destroy(toDestroy)];
+				}
+                // Found one, update
+				else {
+					return Work.update(found[0], createCriteria);
+				}
+			})
+			.spread(function (updated, destroyed) {
+                // If nothing is updated
+				if (!updated) {
+					return res.send(response.addError("Error saving template."));
+				}
+				else {
+					return response
+						.addSuccess("The template has been saved successfully.")
+						.addInfo("Test info only.")
+						.addError("Test error.")
+						.addWarning("Test warning.")
+						.send();
+				}
+			})
+			.catch(function (err) {
+				return response.sendErr(err);
+			});
     },
 
-    saveWork: function(req, res) {
-        Work.find({ id: { ">": 0 } }).exec(function(err, work) {
+    saveWork: function (req, res) {
+        Work.find({ id: { ">": 0 } }).exec(function (err, work) {
             sails.log.info(work[0]);
         });
     }

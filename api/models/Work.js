@@ -15,7 +15,10 @@ module.exports = {
         },
         scriptChoices: {
             type: 'json'
-        },
+		},
+
+        // A template contains the default content and settings when a user creates a new work.
+        // There is only 1 template in this model.
         isTemplate: {
             type: "boolean"
         }

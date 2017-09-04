@@ -4,43 +4,63 @@
 //
 window._vm = JSON.parse($("#hdnVm").val());
 window._csrf = $("#hdnCsrf").val();
-$("#hdnVm").remove();
-$("#hdnCsrf").remove();
+$("#hdnVm, #hdnCsrf").remove();
 
 // Extension methods
 //
+/**
+  * String format similar to .NET
+  *
+  * @example
+  * var str = "http://{0}/{1}";
+  * location.href = str.format("google.com", "blabla");
+
+  * @returns {string}
+  **/
 if (!String.prototype.format) {
-    String.prototype.format = function() {
-        var args = arguments;
-        return this.replace(/{(\d+)}/g, function(match, number) {
-            return typeof args[number] !== "undefined"
-                ? args[number]
-                : match;
-        });
-    };
+	String.prototype.format = function () {
+		var args = arguments;
+		return this.replace(/{(\d+)}/g, function (match, number) {
+			return typeof args[number] !== "undefined"
+				? args[number]
+				: match;
+		});
+	};
+}
+
+// Shortcut extension methods for linq
+if (!Array.prototype.select) {
+	Array.prototype.select = function (cb) {
+		return Enumerable.from(this).select(cb);
+	};
+}
+if (!Array.prototype.where) {
+	Array.prototype.where = function (cb) {
+		return Enumerable.from(this).where(cb);
+	};
 }
 
 // Static methods
 //
-window.Shared = (function() {
+window.Shared = (function () {
     /**
      * Clear the error display and message for our site
      * @example Shared.clearError("#login");
      * @param {string} selector of the container that has validation
      * @returns {void}
      **/
-    var clearError = function(container) {
-        var contentElements = container + " .popper-content"; // popover content comes from here
-        var popoverElements = container + " .popper"; // element that will trigger the popover ui
-        var errorElements = container + " .error"; // error decoration
-        var inputElements = container + " input"; // get all input fields
+	var clearError = function (container) {
+		var contentElements = container + " .popper-content"; // popover content comes from here
+		var popoverElements = container + " .popper"; // element that will trigger the popover ui
+		var errorElements = container + " .error"; // error decoration
+		var inputElements = container + " input"; // get all input fields
 
-        $(contentElements).html("");
-        $(popoverElements).popover("dispose");
-        $(popoverElements).removeClass("popper");
-        $(errorElements).removeClass("error");
-        $(inputElements).val("");
-    };
+		$(contentElements).html("");
+		$(popoverElements).popover("dispose");
+		$(popoverElements).removeClass("popper");
+		$(errorElements).removeClass("error");
+		$(inputElements).val("");
+	};
 
     /**
      * Initialize bootstrap 4 popover based on container
@@ -48,16 +68,16 @@ window.Shared = (function() {
      * @param {string} selector of the container that has validation
      * @returns {void}
      **/
-    var popover = function(popoverContainer) {
-        $(popoverContainer + " .popper").popover({
-            "container": "body",
-            "html": true,
-            "animation": false,
-            "content": function() {
-                return $(this).next(".popper-content").html();
-            }
-        });
-    };
+	var popover = function (popoverContainer) {
+		$(popoverContainer + " .popper").popover({
+			"container": "body",
+			"html": true,
+			"animation": false,
+			"content": function () {
+				return $(this).next(".popper-content").html();
+			}
+		});
+	};
 
     /**
      * Initialize bootstrap 4 popover based on container
@@ -66,73 +86,85 @@ window.Shared = (function() {
      * @param {object} validate rules object
      * @returns {void}
      **/
-    var validation = function(form, validateRules) {
-        if ($("body .modal-backdrop").length > 1) {
-            $("body .modal-backdrop").not(":first").remove();
-        }
-        popover(form);
-        $(form).validate({
-            rules: validateRules,
-            focusInvalid: false,
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass(errorClass).addClass(validClass).next().html("");
-                $(element).popover("dispose");
-            },
-            errorPlacement: function(error, element) {
-                $(element).addClass("popper").next().html($(error).text());
-                popover(form);
-            },
-            success: function(element) { }
-        });
-    };
+	var validation = function (form, validateRules) {
+		if ($("body .modal-backdrop").length > 1) {
+			$("body .modal-backdrop").not(":first").remove();
+		}
+		popover(form);
+		$(form).validate({
+			rules: validateRules,
+			focusInvalid: false,
+			unhighlight: function (element, errorClass, validClass) {
+				$(element).removeClass(errorClass).addClass(validClass).next().html("");
+				$(element).popover("dispose");
+			},
+			errorPlacement: function (error, element) {
+				$(element).addClass("popper").next().html($(error).text());
+				popover(form);
+			},
+			success: function (element) { }
+		});
+	};
 
     /**
-     * Prompt user's confirmation before calling a function
+     * Prompt user's confirmation before calling a specified callback.
+     * Indefinite parameters can be passed to this function that
+     * will eventually be passed to the said callback.
+     *
      * @example
-     * var saveWork = function(isTemplate, overwriteIfExist) {
-     *    if (asTemplate) {
-     *        if (overwriteIfExist) {
+     * var doSomething = function(param1, param2) {
+     *    if (param1) {
+     *        if (param2) {
      *        }
-     *    }
-     *    else {
      *    }
      * };
      * $("#btn-save-work").click(function() {
-     *     Shared.confirm(saveWork, true, false);
+     *     Shared.confirm(doSomething, true, false);
      * });
-     * @param {function} callback to call if the user confirms to proceed
-     * @param {multiple} parameters to be passed to callback
+     *
+     * @param {function} the callback to call if the user confirms to proceed
+     * @param {variadic} variable number of arguments to be passed into the callback
      * @returns {void}
      **/
-    var confirm = function(cb /*indefinite params*/) {
-        if (window.confirm("Are you sure to proceed?")) {
-            var args = Array.prototype.slice.call(arguments, 1);
-            cb.apply(this, args);
-        }
-    };
+	function confirm(cb) {
+		if (window.confirm("Are you sure to proceed?")) {
+			var args = Array.prototype.slice.call(arguments, 1);
+			cb.apply(this, args);
+		}
+	};
 
-    return {
-        clearError:   clearError,
-        popover:      popover,
-        validation:   validation,
-        confirm:      confirm
-    };
+	function showResponse(response) {
+		console.log(response);
+		// TODO: Change this method to show the response using bootstrap brand instead of using alert.
+		var itemsToShow = response.items
+			.select(function (x) { return "({0}) {1}".format(x.type, x.content) })
+			.toArray();
+		alert(itemsToShow.join("\n"));
+	};
+
+	return {
+		clearError: clearError,
+		popover: popover,
+		validation: validation,
+		confirm: confirm,
+		showResponse: showResponse
+	};
 })();
 
 // Events
 //
 // Make all form submission to append csrf token automatically
-$("form").submit(function(e) {
-    $(this).append("<input type='hidden' name='_csrf' value='{0}' />".format(_csrf));
-    return true;
+$("form").submit(function (e) {
+	$(this).append("<input type='hidden' name='_csrf' value='{0}' />".format(_csrf));
+	return true;
 });
 
 // Ajax setup
 //
 $.ajaxSetup({
-    // Append csrf to send data before sending
-    beforeSend: function(jqXHR, settings) {
-        settings.data += "&_csrf={0}".format(window._csrf);
-        return true;
-    }
+	// Append csrf to send data before sending
+	beforeSend: function (jqXHR, settings) {
+		settings.data += "&_csrf={0}".format(window._csrf);
+		return true;
+	}
 });
