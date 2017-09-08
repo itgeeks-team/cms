@@ -19,14 +19,18 @@ module.exports = {
   //To create new User with parameter
   //Brian - End
   create : function(req, res, next) {
-    User.create(req.allParams()).exec(function (err, user) {
-      if (err) {
+    User.create(req.allParams())
+    .then(function(user){
+      return res.json(user);
+    })
+    .catch(function(err){
+        if (err) {
         req.session.flash = {
           err : err
         }
         return res.redirect('/user');
       }
-      return res.json(user);
+    
     });
   },
   show : function(req, res, next) {
