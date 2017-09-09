@@ -61,7 +61,7 @@
         var url = (asTemplate) ? "work/saveTemplate" : "work/saveWork";
 
 		$.post(url, data, function (res) {
-			Shared.showResponse(res);
+			Client.showResponse(res);
         });
     }
 
@@ -86,11 +86,11 @@ $(".work-run").click(Work.run);
 $(".work-tidy").click(Work.tidy);
 
 $(".work-save-template").click(function() {
-    Shared.confirm(Work.saveWork, true);
+    Client.confirm(Work.saveWork, true);
 });
 
 $(".work-save-work").click(function() {
-    Shared.confirm(Work.saveWork, false);
+    Client.confirm(Work.saveWork, false);
 });
 
 // Run

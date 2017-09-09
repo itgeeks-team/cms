@@ -1,0 +1,1 @@
+﻿module.exports = require(process.cwd() + "/assets/js/inhouse/Shared.js");
