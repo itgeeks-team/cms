@@ -1,18 +1,18 @@
-﻿var Work = (function() {
+﻿window.Work = (function() {
     // Init code mirrors
     var htmlCm = CodeMirror($(".work-html")[0], {
-        value: vm.htmlContent,
+        value: _vm.htmlContent,
         mode: "htmlmixed",
     });
     var cssCm = CodeMirror($(".work-css")[0], {
-        value: vm.cssContent,
+        value: _vm.cssContent,
         mode: "css",
     });
     var jsCm = CodeMirror($(".work-js")[0], {
-        value: vm.jsContent,
+        value: _vm.jsContent,
         mode: "javascript",
     });
-    $.each(vm.cmSettings, function(key, val) {
+    $.each(_vm.cmSettings, function(key, val) {
         htmlCm.setOption(key, val);
         cssCm.setOption(key, val);
         jsCm.setOption(key, val);
@@ -27,7 +27,7 @@
         outputDoc.write(htmlCm.getValue());
 
         // TODO: Allow user to select script files to load
-        
+
 
         // Insert css
         $("<style>").html(cssCm.getValue()).appendTo($(outputDoc).find("head"));
@@ -39,31 +39,61 @@
     }
 
     // Tidy up all 3 editors
-    var tidy = function() {
-        var beautifiedHtml = html_beautify(htmlCm.getValue(), vm.tidySettings);
+    function tidy() {
+        var beautifiedHtml = html_beautify(htmlCm.getValue(), _vm.tidySettings);
         htmlCm.setValue(beautifiedHtml);
 
-        var beautifiedCss = css_beautify(cssCm.getValue(), vm.tidySettings);
+        var beautifiedCss = css_beautify(cssCm.getValue(), _vm.tidySettings);
         cssCm.setValue(beautifiedCss);
 
-        var beautifiedJs = js_beautify(jsCm.getValue(), vm.tidySettings);
+        var beautifiedJs = js_beautify(jsCm.getValue(), _vm.tidySettings);
         jsCm.setValue(beautifiedJs);
     }
 
+    // Save this work
+    function saveWork(asTemplate) {
+        var data = {
+            htmlContent: htmlCm.getValue(),
+            cssContent: cssCm.getValue(),
+            jsContent: jsCm.getValue()
+        };
+
+        var url = (asTemplate) ? "work/saveTemplate" : "work/saveWork";
+
+		$.post(url, data, function (res) {
+			Shared.showResponse(res);
+        });
+    }
+
     return {
+        // Fields
         htmlCm: htmlCm,
         cssCm: cssCm,
         jsCm: jsCm,
+
+        // Methods
         run: run,
-        tidy: tidy
+        tidy: tidy,
+        saveWork: saveWork
     };
 
 })();
 
-// Event handlers
-$(".work-menu-run").click(Work.run);
-$(".work-menu-tidy").click(Work.tidy);
+// Events
+//
+$(".work-run").click(Work.run);
+
+$(".work-tidy").click(Work.tidy);
+
+$(".work-save-template").click(function() {
+    Shared.confirm(Work.saveWork, true);
+});
+
+$(".work-save-work").click(function() {
+    Shared.confirm(Work.saveWork, false);
+});
 
 // Run
+//
 Work.tidy();
 Work.run();

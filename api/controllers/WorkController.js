@@ -1,57 +1,61 @@
-﻿var WorkViewModel = require("../viewmodels/WorkViewModel");
+﻿module.exports = {
+    // View actions
+    //
+    index: function (req, res) {
+		return WorkView.index(res);
+    },
 
-// Business Logic
-function initVm() {
-    var vm = new WorkViewModel();
 
-    vm.title = "Work";
 
-    vm.scripts = [
-        "codemirror/codemirror",
-        "codemirror/mode/xml",
-        "codemirror/mode/css",
-        "codemirror/mode/javascript",
-        "codemirror/mode/htmlmixed",
-        "codemirror/addon/active-line",
-        "js-beautify/beautify.min",
-        "js-beautify/beautify-css.min",
-        "js-beautify/beautify-html.min",
-        "work"
-    ];
+    // AJAX actions
+    //
+    // Save template
+	saveTemplate: function (req, res) {
+        // The response to be sent back to client
+		var response = new Response(res);
 
-    vm.hideHeader = true;
+        // Find criteria
+		var findCriteria = { isTemplate: true };
 
-    vm.htmlContent =
-        "<html>" +
-        "<head></head>" +
-        "<body>" +
-        "<p>Sample HTML</p>\\n" +
-        '<input class=\\"btn\\" type=\\"button\\" value=\\"Click Me\\" />\\n' +
-        "</body >" +
-        "</html>";
+        // Create criteria
+        var createCriteria = req.body;
+        createCriteria.isTemplate = true;
 
-    vm.cssContent = "p {background-color: cyan;}";
+        // Find all templates
+		Work.find(findCriteria)
+			.then(function (found) {
+                // If not found
+				if (!found.length) {
+					return Work.create(createCriteria);
+				}
+				// If found more than one, destroy excess (keep only the first one) and update the first one
+				else if (found.length > 1) {
+					var destroyCriteria = findCriteria;
+					destroyCriteria.id = { "!": found[0].id };
+					return [Work.update(found[0], createCriteria), Work.destroy(toDestroy)];
+				}
+                // Found one, update
+				else {
+					return Work.update(found[0], createCriteria);
+				}
+			})
+			.spread(function (updated, destroyed) {
+                // If nothing is updated
+				if (!updated) {
+					return response.addError("Error saving template.").send();
+				}
+				else {
+					return response.addSuccess("The template has been saved successfully.").send();
+				}
+			})
+			.catch(function (err) {
+				return response.setErr(err).send();
+			});
+    },
 
-    vm.jsContent = '$(\\".btn\\").click(function() {alert(\\"Hello!\\");});';
-
-    vm.cmSettings = {
-        tabSize: 3,
-        indentUnit: 3,
-        indentWithTabs: true,
-        lineNumbers: true,
-        styleActiveLine: true
-    };
-
-    vm.tidySettings = {
-        indent_size: vm.cmSettings.tabSize
-    };
-
-    return vm;
-}
-
-module.exports = {
-    index: function(req, res) {
-        var vm = initVm();
-        return res.view({ vm });
+    saveWork: function (req, res) {
+        Work.find({ id: { ">": 0 } }).exec(function (err, work) {
+            sails.log.info(work[0]);
+        });
     }
 };
