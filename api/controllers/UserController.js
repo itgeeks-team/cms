@@ -24,13 +24,10 @@ module.exports = {
       return res.json(user);
     })
     .catch(function(err){
-        if (err) {
         req.session.flash = {
           err : err
-        }
-        return res.redirect('/user');
       }
-    
+        return res.redirect('/user');
     });
   },
   show : function(req, res, next) {
