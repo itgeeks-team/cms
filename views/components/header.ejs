@@ -9,13 +9,13 @@
   <div class="collapse navbar-collapse" id="navbar-content">
     <ul class="nav nav-pills mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" href="#"><span>Home</span></a>
+        <a class="nav-link <% if (req.session.selectedPage == Pages.HOME) { %>active<% } %>" href="#"><span>Home</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><span>Threads</span></a>
+        <a class="nav-link <% if (req.session.selectedPage == Pages.FORUMS) { %>active<% } %>" href="/forums"><span>Forums</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><span>Projects</span></a>
+        <a class="nav-link <% if (req.session.selectedPage == Pages.PROJECTS) { %>active<% } %>" href="#"><span>Projects</span></a>
       </li>
     </ul>
     <% if (session.authenticated === true) { %>
