@@ -54,23 +54,19 @@ WorkView.index = function (res) {
 	vm.settings.scriptChoices.push(scJquery);
 
 	// Get template
-	var response = new Response();
+	var response = new Response(res);
 	Work.findOne({ isTemplate: true })
 		.then(function (result) {
-			// If not found
-			if (!result) {
-				response.addError("Template not found.");
-			}
-			else {
+			// If found, put predefined content
+			if (result) {
 				vm.htmlContent = result.htmlContent;
 				vm.cssContent = result.cssContent;
 				vm.jsContent = result.jsContent;
 			}
-			return res.view({ vm });
+			return response.send(vm);
 		})
 		.catch(function (err) {
-			response.addFatal(err);
-			return res.view({ vm });
+			return response.setErr(err).send(vm);
 		});
 };
 

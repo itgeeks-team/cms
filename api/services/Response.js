@@ -10,8 +10,14 @@
 
 	// Do not store res object in order to avoid circular reference
 	// error when calling this.res.send(this)
-	this.send = function () {
-		return res.send(this);
+	this.send = function (vm) {
+		if (vm) {
+			vm.response = this;
+			return res.view({ vm });
+		}
+		else {
+			return res.send(this); 
+		}
 	};
 
 	this.sendErr = function (err) {

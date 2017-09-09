@@ -42,19 +42,14 @@
 			.spread(function (updated, destroyed) {
                 // If nothing is updated
 				if (!updated) {
-					return res.send(response.addError("Error saving template."));
+					return response.addError("Error saving template.").send();
 				}
 				else {
-					return response
-						.addSuccess("The template has been saved successfully.")
-						.addInfo("Test info only.")
-						.addError("Test error.")
-						.addWarning("Test warning.")
-						.send();
+					return response.addSuccess("The template has been saved successfully.").send();
 				}
 			})
 			.catch(function (err) {
-				return response.sendErr(err);
+				return response.setErr(err).send();
 			});
     },
 

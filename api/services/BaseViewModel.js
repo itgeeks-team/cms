@@ -11,6 +11,6 @@ module.exports = function () {
     // Indicates whether to hide the header or not
 	this.hideHeader = false;
 
-    // Responses to show to users
-	this.responses = [];
+    // The response (refer to Response.js) to be sent to client
+	this.response = null;
 };
