@@ -1,10 +1,9 @@
 ﻿module.exports = {
     // View actions
     //
-    index: function (req, res) {
+	index: function (req, res) {
 		return WorkView.index(res);
     },
-
 
 
     // AJAX actions
@@ -26,7 +25,7 @@
 			.then(function (found) {
                 // If not found
 				if (!found.length) {
-					return Work.create(createCriteria);
+					return [Work.create(createCriteria), false];
 				}
 				// If found more than one, destroy excess (keep only the first one) and update the first one
 				else if (found.length > 1) {
@@ -36,7 +35,7 @@
 				}
                 // Found one, update
 				else {
-					return Work.update(found[0], createCriteria);
+					return [Work.update(found[0], createCriteria), false];
 				}
 			})
 			.spread(function (updated, destroyed) {

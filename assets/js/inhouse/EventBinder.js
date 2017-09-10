@@ -8,16 +8,16 @@ var EventBinder = (function () {
   }
   var header = function () {
     $(components.header).on("shown.bs.modal", "#login", function (e) {
-      Shared.validation("#login form", Validator.loginRules)
+      Client.validation("#login form", Validator.loginRules)
     });
     $(components.header).on("shown.bs.modal", "#sign-up", function (e) {
-      Shared.validation("#sign-up form", Validator.signUpRules)
+      Client.validation("#sign-up form", Validator.signUpRules)
     });
     $(components.header).on("hidden.bs.modal", "#login", function (e) {
-      Shared.clearError("#login");
+      Client.clearError("#login");
     });
     $(components.header).on("hidden.bs.modal", "#sign-up", function (e) {
-      Shared.clearError("#sign-up");
+      Client.clearError("#sign-up");
     });
     $(components.header).on("submit", "#login form", function (e) {
       e.preventDefault();

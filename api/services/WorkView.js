@@ -52,7 +52,7 @@ WorkView.index = function (res) {
 		"jQuery 3.2.1",
 		"dependencies/jquery-3.2.1.min.js");
 	vm.settings.scriptChoices.push(scJquery);
-
+	
 	// Get template
 	var response = new Response(res);
 	Work.findOne({ isTemplate: true })
