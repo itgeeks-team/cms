@@ -2,7 +2,9 @@
 
 // Get server data
 //
-window._vm = JSON.parse($("#hdnVm").val());
+if ($("#hdnVm").length) {
+	window._vm = JSON.parse($("#hdnVm").val());
+}
 window._csrf = $("#hdnCsrf").val();
 $("#hdnVm, #hdnCsrf").remove();
 
