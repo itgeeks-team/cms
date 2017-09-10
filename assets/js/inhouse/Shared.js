@@ -20,5 +20,4 @@
 			});
 		};
 	}
-
-})(typeof exports !== "undefined" ? module.exports : window.Shared = {}, typeof exports !== "undefined");
+})(typeof exports !== "undefined" ? module.exports : window.Shared = {});

@@ -60,8 +60,8 @@
 
         var url = (asTemplate) ? "work/saveTemplate" : "work/saveWork";
 
-		$.post(url, data, function (res) {
-			Client.showResponse(res);
+		$.post(url, data, function (response) {
+			Client.showResponse(response);
         });
     }
 

@@ -19,11 +19,6 @@
 			return res.send(this); 
 		}
 	};
-
-	this.sendErr = function (err) {
-		this.err = err;
-		return res.send(this);
-	};
 }
 
 Response.prototype.addSuccess = function (content) {
@@ -48,4 +43,7 @@ Response.prototype.setErr = function (err) {
 	return this;
 };
 
+
+// Exports
+//
 module.exports = Response;

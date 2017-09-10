@@ -99,13 +99,19 @@ window.Client = (function () {
 		}
 	};
 
+	// TODO: Change this method to show the response using bootstrap brand instead of using alert.
 	function showResponse(response) {
 		console.log(response);
-		// TODO: Change this method to show the response using bootstrap brand instead of using alert.
-		var itemsToShow = Enumerable.from(response.items)
-			.select(function (x) { return "({0}) {1}".format(x.type, x.content) })
-			.toArray();
-		alert(itemsToShow.join("\n"));
+
+		if (response.err) {
+			alert("Response:\n(err) {0}".format(response.err));
+		}
+		else {
+			var itemsToShow = Enumerable.from(response.items)
+				.select(function (x) { return "({0}) {1}".format(x.type, x.content) })
+				.toArray();
+			alert("Response:\n{0}".format(itemsToShow.join("\n")));
+		}
 	};
 
 	return {
