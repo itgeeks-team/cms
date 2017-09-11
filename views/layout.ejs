@@ -15,10 +15,10 @@
 
   <body>
     <% if (typeof vm !== "undefined") { %>
-    <input id="hdnVm" type="hidden" value="<%= JSON.stringify(vm) %>" />
+    <input id="hdn-vm" type="hidden" value="<%= JSON.stringify(vm) %>" />
     <% } %>
 
-    <input id="hdnCsrf" type="hidden" value="<%= _csrf %>" />
+    <input id="hdn-csrf" type="hidden" value="<%= _csrf %>" />
 
     <% if (typeof vm === "undefined" || vm.hideHeader === false) { %>
       <header>
