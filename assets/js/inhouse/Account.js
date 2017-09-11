@@ -15,7 +15,6 @@ var Account = (function () {
         usernameOrEmail : $(target).find("input[name='username-or-email']").val(),
         password        : $(target).find("input[name='password']").val(),
         isEmail         : isEmail($(target).find("input[name='username-or-email']").val()),
-        _csrf           : $(target).find("input[name='_csrf']").val(),
         view            : "components/header"
       },
       dataType: "html",
@@ -36,7 +35,6 @@ var Account = (function () {
         email           : $(target).find("input[name='email']").val(),
         password        : $(target).find("input[name='password']").val(),
         passwordConfirm : $(target).find("input[name='password-confirm']").val(),
-        _csrf           : $(target).find("input[name='_csrf']").val(),
         view            : "components/header"
       },
       dataType: "html",
@@ -52,7 +50,6 @@ var Account = (function () {
       type: "POST",
       url: SITE_URL + "/session/destroy",
       data: {
-        _csrf : $(target).next("input[name='_csrf']").val(),
         view  : "components/header"
       },
       dataType: "html",

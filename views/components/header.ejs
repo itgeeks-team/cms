@@ -25,7 +25,6 @@
       </svg>
       <span class="small">Logout</span>
     </button>
-    <input type="hidden" name="_csrf" value="<%- _csrf %>">
     <% } else { %>
     <button type="button" class="btn btn-primary align-self-center" data-toggle="modal" data-target="#login">
       <svg class="icon small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -82,7 +81,6 @@
               <button type="submit" class="btn btn-primary mb-3">Login</button>
               <div class="align-self-center">Not a member yet? <a href="#sign-up" data-toggle="modal" data-dismiss="modal">Sign up now</a></div>
             </div>
-            <input type="hidden" name="_csrf" value="<%- _csrf %>">
           </fieldset>
         </form>
       </div>
@@ -153,7 +151,6 @@
               <button type="submit" class="btn btn-primary mb-3">Sign up</button>
               <div class="align-self-center">Already is a member? <a href="#login" data-toggle="modal" data-dismiss="modal">Login here</a></div>
             </div>
-            <input type="hidden" name="_csrf" value="<%- _csrf %>">
           </fieldset>
         </form>
       </div>
