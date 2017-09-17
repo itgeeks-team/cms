@@ -8,15 +8,11 @@
 
   <div class="collapse navbar-collapse" id="navbar-content">
     <ul class="nav nav-pills mr-auto">
-      <li class="nav-item">
-        <a class="nav-link <% if (req.session.selectedPage == Pages.HOME) { %>active<% } %>" href="#"><span>Home</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if (req.session.selectedPage == Pages.FORUMS) { %>active<% } %>" href="/forums"><span>Forums</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if (req.session.selectedPage == Pages.PROJECTS) { %>active<% } %>" href="#"><span>Projects</span></a>
-      </li>
+      <% for (var i = 0; i < vm.header.pills.length; i++) { %>
+        <li class="nav-item">
+          <a href="/<%= vm.header.pills[i].controller %>/<%= vm.header.pills[i].action %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><%= vm.header.pills[i].title %></a>
+        </li>
+      <% } %>
     </ul>
     <% if (session.authenticated === true) { %>
     <button type="button" class="btn btn-primary align-self-center" role="logout-btn" data-user-id="1234">

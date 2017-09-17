@@ -32,7 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  "GET /": "PageController.index",
+  "GET /": "HomeController.index",
   'GET /forums': "PageController.forums",
 
   "POST /session/new"     : "SessionController.new",

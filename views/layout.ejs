@@ -20,7 +20,7 @@
 
     <input id="hdn-csrf" type="hidden" value="<%= _csrf %>" />
 
-    <% if (typeof vm === "undefined" || vm.hideHeader === false) { %>
+    <% if (typeof vm === "undefined" || vm.header.hide === false) { %>
       <header>
       <%- partial('components/header.ejs') %>
       </header>

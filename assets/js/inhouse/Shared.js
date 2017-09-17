@@ -20,4 +20,8 @@
 			});
 		};
 	}
+
+	exports = (function () {
+        
+	})();
 })(typeof exports !== "undefined" ? module.exports : window.Shared = {});

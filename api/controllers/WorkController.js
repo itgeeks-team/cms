@@ -1,8 +1,60 @@
-﻿module.exports = {
+﻿function WorkViewModel() {
+	BaseViewModel.call(this, "Work");
+	this.scripts = [
+		"codemirror/codemirror",
+		"codemirror/mode/xml",
+		"codemirror/mode/css",
+		"codemirror/mode/javascript",
+		"codemirror/mode/htmlmixed",
+		"codemirror/addon/active-line",
+		"js-beautify/beautify.min",
+		"js-beautify/beautify-css.min",
+		"js-beautify/beautify-html.min",
+		"work"
+	];
+	this.htmlContent = "";
+	this.cssContent = "";
+	this.jsContent = "";
+	this.cmSettings = {};
+	this.tidySettings = {};
+	this.settings = {
+        //TODO script choices
+	};
+}
+
+module.exports = {
     // View actions
     //
 	index: function (req, res) {
-		return WorkView.index(res);
+		// Init
+		var vm = new WorkViewModel();
+		vm.title = "Work - New";
+		vm.cmSettings = {
+			tabSize: 3,
+			indentUnit: 3,
+			indentWithTabs: true,
+			lineNumbers: true,
+			styleActiveLine: true
+		};
+		vm.tidySettings = {
+			indent_size: vm.cmSettings.tabSize
+		};
+
+		// Get template
+		var response = new Response(res);
+		Work.findOne({ isTemplate: true })
+			.then(function (result) {
+				// If found, put predefined content
+				if (result) {
+					vm.htmlContent = result.htmlContent;
+					vm.cssContent = result.cssContent;
+					vm.jsContent = result.jsContent;
+				}
+				return response.send(vm);
+			})
+			.catch(function (err) {
+				return response.setErr(err).send(vm);
+			});
     },
 
 

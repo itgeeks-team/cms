@@ -2,11 +2,11 @@
 
 // Get server data
 //
-if ($("#hdnVm").length) {
-	window._vm = JSON.parse($("#hdnVm").val());
+if ($("#hdn-vm").length) {
+	window._vm = JSON.parse($("#hdn-vm").val());
 }
-window._csrf = $("#hdnCsrf").val();
-$("#hdnVm, #hdnCsrf").remove();
+window._csrf = $("#hdn-csrf").val();
+$("#hdn-vm, #hdn-csrf").remove();
 
 // Static methods
 //
