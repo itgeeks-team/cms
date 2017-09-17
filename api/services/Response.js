@@ -12,11 +12,11 @@
 	// error when calling this.res.send(this)
 	this.send = function (vm) {
 		if (vm) {
-			vm.response = this;
+			vm.setResponse(this);
 			return res.view({ vm });
 		}
 		else {
-			return res.send(this); 
+			return res.send(this);
 		}
 	};
 }
