@@ -26,17 +26,16 @@ module.exports = function (controllerName) {
 				action: "",
 				title: "Projects"
 			}
-		],
-
-		hide: false // Indicates whether to hide header or not
+		]
 	};
 
-    // The response (refer to Response.js) to be sent to client
-	this.response = null;
-
+    // Get active header pill
 	for (var i = 0; i < this.header.pills.length; i++) {
 		if (this.header.pills[i].controller === controllerName) {
 			this.header.pills[i].active = true;
 		}
 	}
+
+    // The response (refer to Response.js) to be sent to client
+	this.response = null;
 };

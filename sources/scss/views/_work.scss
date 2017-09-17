@@ -1,15 +1,5 @@
-﻿.work-output {
+﻿#work-output {
   width: 100%;
   height: 100%;
   border: none;
-}
-
-.work-menu {
-  left: initial; /*position to right*/
-  right: $grid-gutter-width-base / 2;
-  opacity: .4;
-}
-
-.work-menu:hover {
-  opacity: 1;
 }

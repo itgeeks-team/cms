@@ -1,34 +1,31 @@
-﻿function WorkViewModel() {
-	BaseViewModel.call(this, "Work");
-	this.scripts = [
-		"codemirror/codemirror",
-		"codemirror/mode/xml",
-		"codemirror/mode/css",
-		"codemirror/mode/javascript",
-		"codemirror/mode/htmlmixed",
-		"codemirror/addon/active-line",
-		"js-beautify/beautify.min",
-		"js-beautify/beautify-css.min",
-		"js-beautify/beautify-html.min",
-		"work"
-	];
-	this.htmlContent = "";
-	this.cssContent = "";
-	this.jsContent = "";
-	this.cmSettings = {};
-	this.tidySettings = {};
-	this.settings = {
-        //TODO script choices
-	};
-}
+﻿var vm = new ViewModel("Work");
+vm.scripts = [
+	"codemirror/codemirror",
+	"codemirror/mode/xml",
+	"codemirror/mode/css",
+	"codemirror/mode/javascript",
+	"codemirror/mode/htmlmixed",
+	"codemirror/addon/active-line",
+	"js-beautify/beautify.min",
+	"js-beautify/beautify-css.min",
+	"js-beautify/beautify-html.min",
+	"work"
+];
 
 module.exports = {
     // View actions
     //
 	index: function (req, res) {
+		var response = new Response(res);
+		vm.title = "Works";
+		return response.send(vm);
+	},
+
+	editor: function (req, res) {
+		var response = new Response(res);
+
 		// Init
-		var vm = new WorkViewModel();
-		vm.title = "Work - New";
+		vm.title = "New work";
 		vm.cmSettings = {
 			tabSize: 3,
 			indentUnit: 3,
@@ -41,7 +38,6 @@ module.exports = {
 		};
 
 		// Get template
-		var response = new Response(res);
 		Work.findOne({ isTemplate: true })
 			.then(function (result) {
 				// If found, put predefined content
@@ -62,7 +58,6 @@ module.exports = {
     //
     // Save template
 	saveTemplate: function (req, res) {
-        // The response to be sent back to client
 		var response = new Response(res);
 
         // Find criteria
