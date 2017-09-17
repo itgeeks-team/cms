@@ -29,6 +29,11 @@ module.exports = {
     },
     encryptedPassword : {
       type : 'string'
+    },
+
+    thread : {
+      collection : "thread",
+      via : "owner"
     }
   },
   beforeCreate : function (values, next) {

@@ -60,6 +60,7 @@
 =            5th.Component Styles             =
 =============================================*/
 @import
+  "components/loader",
   "components/modal",
   "components/icons",
   "components/buttons",
@@ -72,13 +73,15 @@
 =            6th.View Styles             =
 =============================================*/
 @import
+  "views/forums",
+  "views/login",
   "views/home",
   "views/chat",
   "views/work";
 /*=====     End of Component Styles    ======*/
 
 /*=============================================
-=            6th.Theme Styles             =
+=            7th.Theme Styles             =
 =============================================*/
 @import
   "themes/default";

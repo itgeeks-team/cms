@@ -3,15 +3,17 @@
     <button class="navbar-toggler navbar-toggler-left align-self-center" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand pt-2 pb-2" href="#"><h2 class="mb-0">IT Geeks</h2></a>
+    <a class="navbar-brand pt-2 pb-2" href="/"><h2 class="mb-0">IT Geeks</h2></a>
   </div>
 
   <div class="collapse navbar-collapse" id="navbar-content">
     <ul class="nav nav-pills mr-auto">
-      <% for (var i = 0; i < vm.header.pills.length; i++) { %>
-        <li class="nav-item">
-          <a href="/<%= vm.header.pills[i].controller %>/<%= vm.header.pills[i].action %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><%= vm.header.pills[i].title %></a>
-        </li>
+      <% if (typeof vm.header.pills !== "undefined") { %>
+        <% for (var i = 0; i < vm.header.pills.length; i++) { %>
+          <li class="nav-item">
+            <a href="<%= vm.header.pills[i].urlPath %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
+          </li>
+        <% } %>
       <% } %>
     </ul>
     <% if (session.authenticated === true) { %>
