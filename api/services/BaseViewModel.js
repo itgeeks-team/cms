@@ -55,7 +55,6 @@ BaseViewModel.prototype.setActivePill = function (urlPath) {
  * @return {void}
  **/
 BaseViewModel.prototype.setTitle = function (title) {
-  this.title = ""; // Reset value for other actions
   this.title = title;
 }
 
@@ -65,7 +64,6 @@ BaseViewModel.prototype.setTitle = function (title) {
  * @return {void}
  **/
 BaseViewModel.prototype.setScripts = function (scripts) {
-  this.scripts = []; // Reset value for other actions
   this.scripts = scripts;
 }
 
@@ -75,7 +73,6 @@ BaseViewModel.prototype.setScripts = function (scripts) {
  * @return {void}
  **/
 BaseViewModel.prototype.hideHeader = function (hide) {
-  this.header.hide = false; // Reset value for other actions
   this.header.hide = hide;
 }
 
@@ -85,7 +82,6 @@ BaseViewModel.prototype.hideHeader = function (hide) {
  * @return {void}
  **/
 BaseViewModel.prototype.setResponse = function (response) {
-  this.response = null; // Reset value for other actions
   this.response = response;
 }
 
