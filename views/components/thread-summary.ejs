@@ -1,0 +1,12 @@
+<div class="list-group">
+<% threads.forEach(function(thread) { %>
+  <div class="list-group-item">
+    <div class="card-block text-left">
+      <h4 class="card-title"><%= thread.title %></h4>
+      <p class="card-text"><%= thread.content %></p>
+      <a href="#" class="card-link"><%= thread.owner %></a>
+      <a href="#" class="card-link"><%= thread.createdAt %></a>
+    </div>
+  </div>
+<% }) %>
+</div>

@@ -29,10 +29,11 @@ var jsFilesToInject = [
     'js/dependencies/tether.min.js',
     'js/dependencies/bootstrap.min.js',
     'js/dependencies/*.js',
-	'js/inhouse/Shared.js',
-	'js/inhouse/Client.js',
+    'js/inhouse/Shared.js',
+    'js/inhouse/Client.js',
     'js/inhouse/CustomValidator.js',
     'js/inhouse/Account.js',
+    'js/inhouse/Thread.js',
     'js/inhouse/EventBinder.js'
     // Controller should specify which js to load
 ];

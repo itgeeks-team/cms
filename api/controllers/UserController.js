@@ -5,12 +5,7 @@
  *
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var vm = {
-    title : "User",
-        scripts: [
 
-    ]
-};
 module.exports = {
 	new : function(req, res) {
     res.view(vm);
@@ -18,16 +13,16 @@ module.exports = {
   //Brian 20170730 - Start
   //To create new User with parameter
   //Brian - End
+  // Ajax call in Account.js signUp
   create : function(req, res, next) {
     User.create(req.allParams())
     .then(function(user){
-      return res.json(user);
+      req.session.authenticated = true;
+      req.session.User = user;
+      return res.view(req.viewData.view, { user, layout : null});
     })
     .catch(function(err){
-        req.session.flash = {
-          err : err
-      }
-        return res.redirect('/user');
+      console.log(err);
     });
   },
   show : function(req, res, next) {

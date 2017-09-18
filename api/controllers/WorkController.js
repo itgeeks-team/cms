@@ -25,7 +25,8 @@ module.exports = {
 		var response = new Response(res);
 
 		// Init
-		vm.title = "New work";
+		var vm = new WorkViewModel();
+		vm.title = "Work - New";
 		vm.cmSettings = {
 			tabSize: 3,
 			indentUnit: 3,
@@ -43,9 +44,9 @@ module.exports = {
 				// If found, put predefined content
 				if (result) {
 					vm.htmlContent = result.htmlContent;
-					vm.cssContent = result.cssContent;
-					vm.jsContent = result.jsContent;
-				}
+					vm.cssContent  = result.cssContent;
+					vm.jsContent   = result.jsContent;
+        }
 				return response.send(vm);
 			})
 			.catch(function (err) {

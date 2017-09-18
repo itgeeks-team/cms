@@ -6,9 +6,6 @@
  */
 
 module.exports = {
-
-
-
   /**
    * `SessionController.new()`
    * @author David Tan
@@ -28,21 +25,27 @@ module.exports = {
       userObj.username = req.param("usernameOrEmail");
     }
 
-    User.findOne(userObj).exec(function (err, user) {
-      if (err) console.log(err);
-      bcrypt.compare(req.param("password"), user.encryptedPassword, function (err, valid) {
-        if (valid === true) {
-          req.session.authenticated = true;
-          req.session.User          = user;
-          user.layout               = null;
-          return res.view(req.viewData.view, user);
-        } else {
-          return res.view(req.viewData.view);
-        }
+    User.findOne(userObj)
+    .then(function (user) {
+      bcrypt.compare(req.param("password"), user.encryptedPassword)
+        .then(function (valid) {
+          if (valid === true) {
+            req.session.authenticated = true;
+            req.session.User          = user;
+            user.layout               = null;
+            return res.view(req.viewData.view, user);
+          } else {
+            return res.view(req.viewData.view);
+          }
+      })
+      .catch(function (err) {
+        if (err) console.log(err);
       });
+    })
+    .catch(function (err) {
+      if (err) console.log(err);
     });
   },
-
 
   /**
    * `SessionController.destroy()`
@@ -55,8 +58,9 @@ module.exports = {
    */
   destroy: function (req, res, next) {
     req.session.authenticated = false;
-    req.session.User          = null;
-    return res.view(req.viewData.view, {layout : null});
+    req.session.User = null;
+    delete req.session.User; // sails js destroy not working, use native javascript to destroy User object
+    return res.view(req.viewData.view, { layout : null });
   }
 };
 
