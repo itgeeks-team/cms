@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  "GET /"         : "NavigationController.home",
-  "GET /forums"   : "NavigationController.forums",
-  "GET /projects" : "NavigationController.projects",
+  "GET /"                       : "HomeController.index",
+  "GET /forums/:category/:page" : "ThreadController.show",
+  "GET /forums/*"               : "ThreadController.show",
 
   "GET /thread/show"   : "ThreadController.show",
   "GET /thread/create" : "ThreadController.create",

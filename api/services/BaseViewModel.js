@@ -11,18 +11,21 @@ function BaseViewModel() {
   this.header = {
     pills: [
       {
-        urlPath: "/",
+        controller: "Home",
         title: "Home",
+        href: "/",
         active : false
       },
       {
-        urlPath: "/forums",
+        controller: "Thread",
         title: "Forums",
+        href: "/forums/all/1",
         active : false
       },
       {
-        urlPath: "/projects",
+        controller: "Projects",
         title: "Projects",
+        href: "/projects",
         active : false
       }
     ],
@@ -40,49 +43,13 @@ function BaseViewModel() {
  * @param {string} urlPath e.g. /forums pass as req.path will be preferable
  * @return {void}
  **/
-BaseViewModel.prototype.setActivePill = function (urlPath) {
+BaseViewModel.prototype.setActivePill = function (controller) {
   for (var i = 0; i < this.header.pills.length; i++) {
     this.header.pills[i].active = false; // Reset value for other actions
-    if (this.header.pills[i].urlPath === urlPath) {
+    if (this.header.pills[i].controller === controller) {
       this.header.pills[i].active = true;
     }
   }
-}
-
-/**
- * Set title for page
- * @param {string} title title for the page
- * @return {void}
- **/
-BaseViewModel.prototype.setTitle = function (title) {
-  this.title = title;
-}
-
-/**
- * Set scripts that needed for page
- * @param {array} title array of javascripts
- * @return {void}
- **/
-BaseViewModel.prototype.setScripts = function (scripts) {
-  this.scripts = scripts;
-}
-
-/**
- * hide or show header
- * @param {boolean} hide show or hide
- * @return {void}
- **/
-BaseViewModel.prototype.hideHeader = function (hide) {
-  this.header.hide = hide;
-}
-
-/**
- * controller response
- * @param {object} hide response to client
- * @return {void}
- **/
-BaseViewModel.prototype.setResponse = function (response) {
-  this.response = response;
 }
 
 module.exports = BaseViewModel;

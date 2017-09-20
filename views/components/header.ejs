@@ -8,10 +8,10 @@
 
   <div class="collapse navbar-collapse" id="navbar-content">
     <ul class="nav nav-pills mr-auto">
-      <% if (typeof vm.header.pills !== "undefined") { %>
+      <% if (typeof vm !== "undefined") { %>
         <% for (var i = 0; i < vm.header.pills.length; i++) { %>
           <li class="nav-item">
-            <a href="<%= vm.header.pills[i].urlPath %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
+            <a href="<%= vm.header.pills[i].href %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
           </li>
         <% } %>
       <% } %>

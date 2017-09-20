@@ -40,4 +40,3 @@ var Thread = (function () {
 })();
 
 $("#threads div.nav-link").on("click", Thread.switchThreadTab);
-Thread.loadThreads();

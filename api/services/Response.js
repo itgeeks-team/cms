@@ -12,7 +12,7 @@
 	// error when calling this.res.send(this)
 	this.send = function (vm) {
 		if (vm) {
-			vm.setResponse(this);
+			vm.response = this;
 			return res.view({ vm });
 		}
 		else {

@@ -14,6 +14,8 @@
     </ul>
   </div>
   <div class="card-block" role="container">
-    <div class="loader"></div>
+    <% if (typeof threads !== "undefined" && threads.length > 0) { %>
+    <%- partial('../components/thread-summary.ejs') %>
+    <% } %>
   </div>
 </div>
