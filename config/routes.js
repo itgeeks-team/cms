@@ -32,12 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  "GET /"         : "NavigationController.home",
-  "GET /forums"   : "NavigationController.forums",
-  "GET /projects" : "NavigationController.projects",
-
-  "GET /thread/show"   : "ThreadController.show",
-  "GET /thread/create" : "ThreadController.create",
+  "GET /"         : "/Home",
 
   "POST /session/new"     : "SessionController.new",
   "POST /session/destroy" : "SessionController.destroy",

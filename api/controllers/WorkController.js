@@ -13,19 +13,16 @@ vm.scripts = [
 ];
 
 module.exports = {
-    // View actions
+    // Views
     //
 	index: function (req, res) {
-		var response = new Response(res);
+		var response = new Response(req, res);
 		vm.title = "Works";
 		return response.send(vm);
 	},
 
 	editor: function (req, res) {
-		var response = new Response(res);
-
-		// Init
-		var vm = new WorkViewModel();
+		var response = new Response(req, res);
 		vm.title = "Work - New";
 		vm.cmSettings = {
 			tabSize: 3,
@@ -55,11 +52,11 @@ module.exports = {
     },
 
 
-    // AJAX actions
+    // AJAX
     //
     // Save template
 	saveTemplate: function (req, res) {
-		var response = new Response(res);
+		var response = new Response(req, res);
 
         // Find criteria
 		var findCriteria = { isTemplate: true };

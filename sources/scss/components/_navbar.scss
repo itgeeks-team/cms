@@ -1,4 +1,4 @@
-.navbar {
+﻿.navbar {
   background-color: $navbar-bg-color !important;
   @include set-prefix("box-shadow", "0px 1px 15px -1px #{$navbar-shadow-color}");
   #navbar-content {
@@ -36,6 +36,19 @@
         & > span {
           display: table-cell;
           vertical-align: middle;
+        }
+      }
+      .dropdown-menu {
+        margin: -0.07rem 0 0 0;
+      }
+      .dropdown-menu:hover {
+          display: block;
+      }
+      &.dropdown > .nav-link:hover {
+        cursor: pointer;
+
+        & + .dropdown-menu {
+          display: block;
         }
       }
     }

@@ -1,15 +1,15 @@
 ﻿var vm = new ViewModel("Home");
 
 module.exports = {
-    // View actions
+    // Views
     //
 	index: function (req, res) {
-		// Init
+		var response = new Response(req, res);
 		vm.title = "CMS - Home";
-		return new Response(res).send(vm);
+		return response.send(vm);
     }
 
 
-    // AJAX actions
+    // AJAX
     //
 };

@@ -1,4 +1,7 @@
-﻿if (true) {
+﻿if (_vm.view === "index") {
+
+}
+else if (_vm.view === "editor") {
 	// Hide header
 	Client.showHeader(false);
 
@@ -21,7 +24,7 @@
 		jsCm.setOption(key, val);
 	});
 
-    // Render output based on editors' content
+	// Render output based on editors' content
 	function run() {
 		var outputDoc = $("#work-output").contents()[0];
 		outputDoc.open();
@@ -77,7 +80,7 @@
 	$("#work-save-template").click(function () {
 		Client.confirm(saveWork, true);
 	});
- 
+
 	$("#work-save-work").click(function () {
 		Client.confirm(saveWork, false);
 	});
