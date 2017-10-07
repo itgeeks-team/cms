@@ -1,4 +1,4 @@
-﻿function Response(res) {
+﻿function Response(req, res) {
 	// An item is an object of { type, content }
 	// Where type is the type of content, either "success", "info", "warning", or "error"
 	// Where content is of any type that is to be sent to the client
@@ -13,6 +13,7 @@
 	this.send = function (vm) {
 		if (vm) {
 			vm.response = this;
+			vm.view = req.options.action;
 			return res.view({ vm });
 		}
 		else {

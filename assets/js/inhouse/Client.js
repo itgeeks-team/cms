@@ -99,7 +99,7 @@ window.Client = (function () {
 			var args = Array.prototype.slice.call(arguments, 1);
 			cb.apply(this, args);
 		}
-	};
+	}
 
 	// TODO: Change this method to show the response using bootstrap brand instead of using alert.
 	function showResponse(response) {
@@ -114,18 +114,28 @@ window.Client = (function () {
 				.toArray();
 			alert("Response:\n{0}".format(itemsToShow.join("\n")));
 		}
-	};
+	}
+
+	function showHeader(show) {
+		$("#header").toggle(show);
+	}
 
 	return {
 		clearError: clearError,
 		popover: popover,
 		validation: validation,
 		confirm: confirm,
-		showResponse: showResponse
+		showResponse: showResponse,
+        showHeader: showHeader
 	};
 })();
 
-// Events
+// Hotkeys
+//
+
+
+
+// Event handlers
 //
 // Make all form submission to append csrf token automatically
 $("form").submit(function (e) {

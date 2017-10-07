@@ -1,13 +1,41 @@
-﻿var vm = new (require("../services/WorkViewModel"))(); // Shorthand class instantiatize
-var Response = require("../services/Response");
+﻿var vm = new ViewModel("Work");
+vm.scripts = [
+	"codemirror/codemirror",
+	"codemirror/mode/xml",
+	"codemirror/mode/css",
+	"codemirror/mode/javascript",
+	"codemirror/mode/htmlmixed",
+	"codemirror/addon/active-line",
+	"js-beautify/beautify.min",
+	"js-beautify/beautify-css.min",
+	"js-beautify/beautify-html.min",
+	"work"
+];
 
 module.exports = {
-    // View actions
+    // Views
     //
 	index: function (req, res) {
-		// Init
+		var response = new Response(req, res);
+		vm.title = "Works";
+		return response.send(vm);
+	},
+
+	editor: function (req, res) {
+		var response = new Response(req, res);
+		vm.title = "Work - New";
+		vm.cmSettings = {
+			tabSize: 3,
+			indentUnit: 3,
+			indentWithTabs: true,
+			lineNumbers: true,
+			styleActiveLine: true
+		};
+		vm.tidySettings = {
+			indent_size: vm.cmSettings.tabSize
+		};
+
 		// Get template
-		var response = new Response(res);
 		Work.findOne({ isTemplate: true })
 			.then(function (result) {
 				// If found, put predefined content
@@ -24,12 +52,11 @@ module.exports = {
     },
 
 
-    // AJAX actions
+    // AJAX
     //
     // Save template
 	saveTemplate: function (req, res) {
-        // The response to be sent back to client
-		var response = new Response(res);
+		var response = new Response(req, res);
 
         // Find criteria
 		var findCriteria = { isTemplate: true };

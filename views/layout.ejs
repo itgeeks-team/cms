@@ -15,23 +15,21 @@
 
   <body>
     <% if (typeof vm !== "undefined") { %>
-    <input id="hdn-vm" type="hidden" value="<%= JSON.stringify(vm) %>" />
+      <input id="hdn-vm" type="hidden" value="<%= JSON.stringify(vm) %>" />
     <% } %>
 
     <input id="hdn-csrf" type="hidden" value="<%= _csrf %>" />
 
-    <% if (typeof vm === "undefined" || vm.header.hide === false) { %>
-      <header>
+    <header id="header">
       <%- partial('components/header.ejs') %>
-      </header>
-    <% } %>
+    </header>
 
     <main class="container-fluid">
       <%- body %>
     </main>
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
     <!--LIVERELOAD CHROME PLUGIN-->

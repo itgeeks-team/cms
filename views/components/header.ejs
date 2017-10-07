@@ -7,15 +7,28 @@
   </div>
 
   <div class="collapse navbar-collapse" id="navbar-content">
+    <!--Nav pills-->
     <ul class="nav nav-pills mr-auto">
-      <% if (typeof vm !== "undefined") { %>
-        <% for (var i = 0; i < vm.header.pills.length; i++) { %>
+      <% for (var i = 0; i < vm.header.pills.length; i++) { %>
+        <% if (vm.header.pills[i].children.length) { %>
+          <!--Dropdown-->
+          <li class="nav-item dropdown">
+              <a href="/<%= vm.header.pills[i].controller %>/" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
+              <div class="dropdown-menu">
+                <% for (var j = 0; j < vm.header.pills[i].children.length; j++) { %>
+                  <a class="dropdown-item" href="/<%= vm.header.pills[i].controller %>/<%= vm.header.pills[i].children[j].view %>"><%= vm.header.pills[i].children[j].title %></a>
+                <% } %>
+              </div>
+          </li>
+        <% } else { %>
+          <!--Non-dropdown-->
           <li class="nav-item">
-            <a href="<%= vm.header.pills[i].href %>" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
+            <a href="/<%= vm.header.pills[i].controller %>/" class="nav-link <% if (vm.header.pills[i].active) { %> active <% } %>"><span><%= vm.header.pills[i].title %></span></a>
           </li>
         <% } %>
       <% } %>
     </ul>
+
     <% if (session.authenticated === true) { %>
     <button type="button" class="btn btn-primary align-self-center" role="logout-btn" data-user-id="1234">
       <svg class="icon small" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">

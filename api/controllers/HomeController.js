@@ -1,16 +1,15 @@
-﻿// Init
-var vm = new BaseViewModel();
+﻿var vm = new ViewModel("Home");
 
 module.exports = {
-    // View actions
+    // Views
     //
 	index: function (req, res) {
-    vm.title = "CMS - Home";
-    vm.setActivePill("Home");
-		return new Response(res).send(vm);
-  }
+		var response = new Response(req, res);
+		vm.title = "CMS - Home";
+		return response.send(vm);
+    }
 
 
-    // AJAX actions
+    // AJAX
     //
 };
