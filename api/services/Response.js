@@ -13,6 +13,7 @@
 	this.send = function (vm) {
 		if (vm) {
 			vm.response = this;
+			vm.controller = req.options.controller;
 			vm.view = req.options.action;
 			return res.view({ vm });
 		}

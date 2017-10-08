@@ -1,40 +1,44 @@
-/*=================================================================================
+﻿/*=================================================================================
 
   OUR OWN VARIABLES SECTION
 
   ===============================================================================*/
-$prefixes : (
-  webkit : "-webkit-",
-  moz    : "-moz-",
-  o      : "-o-"
-);
+$prefixes: ( webkit : "-webkit-", moz : "-moz-", o : "-o-" );
 
-$dark       : #212121;
-$grey       : #BDBDBD;
-$grey-white : #FAFAFA;
-$white      : #FFFFFF;
-$light-cyan : #26C6DA;
-$red        : #F44336;
+$dark: #212121;
+$grey: #BDBDBD;
+$grey-white: #FAFAFA;
+$light-cyan: #26C6DA;
 
-$danger-color-primary : $red;
-$border-color-primary : $light-cyan;
-$bg-color-primary     : $grey-white;
-$link-color-primary   : $grey;
-$shadow-color-primary : $grey;
 
-$navbar-bg-color     : $bg-color-primary;
-$navbar-shadow-color : $shadow-color-primary;
+$border-color-primary: $light-cyan;
+$bg-color-primary: $grey-white;
+$link-color-primary: $grey;
+$shadow-color-primary: $grey;
 
-$nav-item-hover-underline-bg : $border-color-primary;
+$navbar-bg-color: $bg-color-primary;
+$navbar-shadow-color: $shadow-color-primary;
 
-$input-error-border-color : $danger-color-primary;
+$nav-item-hover-underline-bg: $border-color-primary;
 
-$modal-link-color : $link-color-primary;
+$modal-link-color: $link-color-primary;
+
+
+
 
 /*=================================================================================
 
   BOOTSTRAP CUSTOMIZATION SECTION
 
   ===============================================================================*/
-$btn-secondary-border             : $border-color-primary;
-$btn-secondary-bg                 : $bg-color-primary;
+// Colors
+//
+$red:     #F44336;
+$green:   #4cb84c;
+
+
+
+// Buttons
+//
+$btn-secondary-border: $border-color-primary;
+$btn-secondary-bg: $bg-color-primary;

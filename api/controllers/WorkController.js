@@ -1,15 +1,15 @@
-﻿var vm = new ViewModel("Work");
+﻿var vm = new ViewModel("Works");
 vm.scripts = [
-	"codemirror/codemirror",
-	"codemirror/mode/xml",
-	"codemirror/mode/css",
-	"codemirror/mode/javascript",
-	"codemirror/mode/htmlmixed",
-	"codemirror/addon/active-line",
-	"js-beautify/beautify.min",
-	"js-beautify/beautify-css.min",
-	"js-beautify/beautify-html.min",
-	"work"
+	"vendor/codemirror/codemirror",
+	"vendor/codemirror/mode/xml",
+	"vendor/codemirror/mode/css",
+	"vendor/codemirror/mode/javascript",
+	"vendor/codemirror/mode/htmlmixed",
+	"vendor/codemirror/addon/active-line",
+	"vendor/js-beautify/beautify.min",
+	"vendor/js-beautify/beautify-css.min",
+	"vendor/js-beautify/beautify-html.min",
+	"views/work"
 ];
 
 module.exports = {

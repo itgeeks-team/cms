@@ -1,41 +1,41 @@
 ﻿// This is the base view model that contains common properties
 // This view model is to be inherited by other view models
-function ViewModel(controllerName) {
-	// Browser tab title
+function ViewModel(activePillTitle) {
+
 	this.title = "Untitled";
-
-	// Client side JS files to load that are not from dependencies folder
 	this.scripts = [];
-
-    // Controller name
-	this.controller = controllerName;
-
-    // View name
+	this.controller = "";
 	this.view = "";
-
-	// Header settings
+	this.activePillTitle = activePillTitle;
 	this.header = {
 		pills: [
 			{
 				title: "Home",
-				controller: "Home",
-				active: false,
+				url: "/Home",
                 children: []
 			},
 			{
 				title: "Forums",
-				controller: "Forum",
-				active: false,
+				url: "/Forum",
                 children: []
 			},
 			{
 				title: "Works",
-				controller: "Work",
-				active: false,
+				url: "/Work",
 				children: [
 					{
 						title: "New",
-                        view: "editor"
+                        url: "/Work/editor"
+					}
+				]
+			},
+			{
+				title: "Others",
+                url: "",
+				children: [
+					{
+						title: "Public Holidays",
+						url: "https://publicholidays.com.my/"
 					}
 				]
 			}
@@ -44,12 +44,6 @@ function ViewModel(controllerName) {
 
 	// The response (refer to Response.js) to be sent to client
 	this.response = null;
-
-	for (var i = 0; i < this.header.pills.length; i++) {
-		if (this.header.pills[i].controller === controllerName) {
-			this.header.pills[i].active = true;
-		}
-	}
 };
 
 module.exports = ViewModel;

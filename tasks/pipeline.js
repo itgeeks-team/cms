@@ -16,26 +16,12 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-    'styles/app.css'
-    //Controller should specify which css to load
 ];
 
 
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-    'js/dependencies/sails.io.js',
-    'js/dependencies/jquery-3.2.1.min.js',
-    'js/dependencies/tether.min.js',
-    'js/dependencies/bootstrap.min.js',
-    'js/dependencies/*.js',
-    'js/inhouse/Shared.js',
-    'js/inhouse/Client.js',
-    'js/inhouse/CustomValidator.js',
-    'js/inhouse/Account.js',
-    'js/inhouse/Thread.js',
-    'js/inhouse/EventBinder.js'
-    // Controller should specify which js to load
 ];
 
 
