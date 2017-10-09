@@ -1,49 +1,46 @@
-﻿/**
- * User.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
- */
+﻿var bcrypt = require("bcryptjs");
 
 module.exports = {
-  schema:true,
+	schema: true,
 
-  attributes: {
-    displayName : {
-      type     : 'string',
-      required : true
-    },
-    username : {
-      type     : 'string',
-      required : true,
-      unique   : true
-    },
-    email : {
-      type     : 'string',
-      email    : true,
-      required : true,
-      unique   : true
-    },
-    encryptedPassword : {
-      type : 'string'
-    },
-    thread : {
-      collection : "thread",
-      via : "owner"
-    }
-  },
+	attributes: {
+		displayName: {
+			type: "string",
+			required: true
+		},
+		username: {
+			type: "string",
+			required: true,
+			unique: true
+		},
+		email: {
+			type: "string",
+			email: true,
+			required: true,
+			unique: true
+		},
+		password: {
+			type: "string"
+		},
+		thread: {
+			collection: "thread",
+			via: "owner"
+		}
+	},
 
-  beforeCreate : function (values, next) {
-    var bcrypt = require("bcryptjs");
-    if (!values.password || values.password != values.passwordConfirm) {
-      return next({err : "Password doesn't match password confirmation."});
-    }
+	beforeCreate: function (create, cb) {
+		if (create.password !== create.confirmedPassword) {
+			return cb("Password does not match confirmed password.");
+		}
 
-    bcrypt.hash(values.password, 10, function (err, hash) {
-      if (err) return next(err);
-      values.encryptedPassword = hash;
-      next();
-    });
-  }
+		bcrypt.hash(create.password, 10)
+			.then(function (hash) {
+				create.password = hash;
+				return cb();
+			})
+			.catch(function (err) {
+				return cb(err);
+			});
+	}
 };
 

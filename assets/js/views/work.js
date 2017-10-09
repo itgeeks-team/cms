@@ -65,9 +65,7 @@ else if (_vm.view === "editor") {
 		};
 
 		var url = (asTemplate) ? "/Work/saveTemplate" : "/Work/saveWork";
-		$.post(url, data, function (response) {
-			Client.showResponse(response);
-		});
+		$.post(url, data, Client.showResponse);
 	}
 
 	// Events

@@ -39,24 +39,6 @@
 		}
 	};
 
-	var login = function (target) {
-		$.ajax({
-			type: "POST",
-			url: SITE_URL + "/session/new",
-			data: {
-				usernameOrEmail: $(target).find("input[name='username-or-email']").val(),
-				password: $(target).find("input[name='password']").val(),
-				isEmail: isEmail($(target).find("input[name='username-or-email']").val()),
-				view: "components/header"
-			},
-			dataType: "html",
-			success: function (res) {
-				$(".modal").modal("hide"); // Close modal-backdrop
-				$("header").html(res); // Get the partial html render in header
-			}
-		});
-	};
-
 	var logout = function (target) {
 		$.ajax({
 			type: "POST",
@@ -81,23 +63,21 @@
 	$("#sign-up").on("shown.bs.modal", function (e) {
 		$(this).find("form").validateForm(signUpRules, signUpMessages);
 	});
-	$("login, #sign-up").on("hidden.bs.modal", function (e) {
+	$("#login, #sign-up").on("hidden.bs.modal", function (e) {
 		$(this).find("form").resetForm();
 	});
 	// Form submit
 	$("#login form").submit(function (e) {
 		e.preventDefault();
-		Account.login(this);
+		if ($(this).valid()) {
+			$(this).ajaxForm("/Header/login", Client.showResponse);
+		}
 	});
 	$("#sign-up form").submit(function (e) {
 		e.preventDefault();
-		$(this).ajaxForm("/user/create", function (res) {
-
-		});
-		//$.post("/user/create", $(this).serialize(), function (response) {
-		//	$(".modal").modal("hide"); // Close modal-backdrop
-		//	$("header").html(res); // Get the partial html render in header
-		//});
+		if ($(this).valid()) {
+			$(this).ajaxForm("/Header/signUp", Client.showResponse);
+		}
 });
 $("button[role='logout-btn']").click(function (e) {
 	Account.logout(this);

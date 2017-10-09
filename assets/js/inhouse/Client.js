@@ -1,8 +1,4 @@
-﻿window.SITE_URL = location.protocol + "//" + location.host;
-
-
-
-// Get server data
+﻿// Global variables
 //
 window._vm = JSON.parse($("#hdn-vm").val());
 window._csrf = $("#hdn-csrf").val();
@@ -89,8 +85,8 @@ $.fn.extend({
     /**
      * Validate form
      * @example $("#my-form").validateForm(rules, messages);
-     * @param jQuery Validation rules
-     * @param jQuery Validation messages
+     * @param jQueryValidation rules
+     * @param jQueryValidation messages
      **/
 	validateForm: function (rules, messages) {
 		this.each(function () {
@@ -112,13 +108,21 @@ $.fn.extend({
 					},
 					errorPlacement: function (error, element) {
 						element.popoverShow(error.text());
-					},
-					success: function (element) { }
+					}
 				});
 			}
 		});
 	},
 
+    /**
+     * Post form data through AJAX
+     * @example
+     * $("#my-form").ajaxForm("/controller/action", function(response) {
+     *    // Handle response
+     * });
+     * @param url
+     * @param callback
+     **/
 	ajaxForm: function (url, cb) {
 		this.each(function () {
 			if (this.tagName === "FORM") {
@@ -132,8 +136,8 @@ $.fn.extend({
 
 // Client methods
 //
-window.Client = (function () {
-
+window.Client = {
+    
     /**
      * Prompt confirm() before calling a function.
      * Indefinite parameters can be passed to the callback.
@@ -149,43 +153,37 @@ window.Client = (function () {
      * @param callback
      * @param variadic arguments of the callback
      **/
-	function confirm(cb) {
+	confirm: function(cb) {
 		if (window.confirm("Are you sure to proceed?")) {
 			var args = Array.prototype.slice.call(arguments, 1);
 			cb.apply(window, args);
 		}
-	}
+	},
 
 	// TODO: Change this method to show the response using bootstrap brand instead of using alert.
-	function showResponse(response) {
+	showResponse: function(response) {
 		console.log(response);
 
 		if (response.err) {
-			alert("Response:\n(err) {0}".format(response.err));
+			if (response.err.raw) {
+				alert("(err) {0}".format(response.err.raw));
+			}
+			else {
+				alert("An unexpected error has occured.");
+			}
 		}
 		else {
 			var itemsToShow = Enumerable.from(response.items)
 				.select(function (x) { return "({0}) {1}".format(x.type, x.content) })
 				.toArray();
-			alert("Response:\n{0}".format(itemsToShow.join("\n")));
+			alert(itemsToShow.join("\n"));
 		}
-	}
+	},
 
-	function showHeader(show) {
+	showHeader: function(show) {
 		$("#header").toggle(show);
 	}
-
-	return {
-		confirm: confirm,
-		showResponse: showResponse,
-		showHeader: showHeader
-	};
-})();
-
-
-
-// Hotkeys
-//
+};
 
 
 
@@ -204,7 +202,7 @@ $("form").submit(function (e) {
 // Ajax setup
 //
 $.ajaxSetup({
-	// Append csrf to send data before sending
+	// Append csrf to data before sending
 	beforeSend: function (jqXHR, settings) {
 		if (typeof settings.data !== "undefined" && !settings.data.contains("_csrf=")) {
 			settings.data += "&_csrf={0}".format(window._csrf);
@@ -215,7 +213,7 @@ $.ajaxSetup({
 
 
 
-// Replace svg <img> with <svg>
+// Replace all svg <img> with <svg> (Reason: can change svg fill color anytime)
 //
 $("img[src$='.svg'").each(function () {
 	var $img = $(this);
