@@ -7,10 +7,7 @@
       <title><%= vm.title %></title>
     <% } %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--STYLES-->
     <link rel="stylesheet" href="/styles/app.css">
-    <!--STYLES END-->
   </head>
 
   <body>
@@ -20,9 +17,7 @@
 
     <input id="hdn-csrf" type="hidden" value="<%= _csrf %>" />
 
-    <header id="header">
-      <%- partial('components/header.ejs') %>
-    </header>
+    <%- partial('components/header.ejs') %>
 
     <main class="container-fluid">
       <%- body %>
@@ -38,20 +33,16 @@
     <% } %>
     <!--LIVERELOAD CHROME PLUGIN END-->
 
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/dependencies/jquery-3.2.1.min.js"></script>
-    <script src="/js/dependencies/tether.min.js"></script>
-    <script src="/js/dependencies/bootstrap.min.js"></script>
-    <script src="/js/dependencies/jquery.validate.min.js"></script>
-    <script src="/js/dependencies/linq.min.js"></script>
+    <!--Common scripts-->
+    <script src="/js/vendor/sails.io.js"></script>
+    <script src="/js/vendor/jquery-3.2.1.min.js"></script>
+    <script src="/js/vendor/tether.min.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/vendor/jquery.validate.min.js"></script>
+    <script src="/js/vendor/linq.min.js"></script>
     <script src="/js/inhouse/Shared.js"></script>
     <script src="/js/inhouse/Client.js"></script>
-    <script src="/js/inhouse/CustomValidator.js"></script>
-    <script src="/js/inhouse/Account.js"></script>
-    <script src="/js/inhouse/Thread.js"></script>
-    <script src="/js/inhouse/EventBinder.js"></script>
-    <!--SCRIPTS END-->
+    <script src="/js/views/header.js"></script>
 
     <!--Additional scripts-->
     <% if (typeof vm !== "undefined") { %>

@@ -1,4 +1,42 @@
-html, body {
+﻿html, body {
   height: 100%;
   @include set-font();
+}
+
+input {
+  font-size: 0.8rem !important;
+  @include set-font();
+
+  &::-webkit-input-placeholder {
+    @include set-font("Light", "italic");
+    color: $grey;
+  }
+
+  &.error {
+    border-color: $brand-danger;
+  }
+
+  &.valid {
+    border-color: $brand-success;
+  }
+}
+
+.input-group {
+
+  .input-group-addon {
+    background-color: $brand-primary;
+
+    & + input[type=text] {
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  }
+}
+
+
+// SVG color in controls
+button,
+.input-group-addon {
+  svg path {
+    fill: white;
+  }
 }

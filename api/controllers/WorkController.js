@@ -1,28 +1,28 @@
-﻿var vm = new ViewModel("Work");
+﻿var vm = ViewModel("Works");
 vm.scripts = [
-	"codemirror/codemirror",
-	"codemirror/mode/xml",
-	"codemirror/mode/css",
-	"codemirror/mode/javascript",
-	"codemirror/mode/htmlmixed",
-	"codemirror/addon/active-line",
-	"js-beautify/beautify.min",
-	"js-beautify/beautify-css.min",
-	"js-beautify/beautify-html.min",
-	"work"
+	"vendor/codemirror/codemirror",
+	"vendor/codemirror/mode/xml",
+	"vendor/codemirror/mode/css",
+	"vendor/codemirror/mode/javascript",
+	"vendor/codemirror/mode/htmlmixed",
+	"vendor/codemirror/addon/active-line",
+	"vendor/js-beautify/beautify.min",
+	"vendor/js-beautify/beautify-css.min",
+	"vendor/js-beautify/beautify-html.min",
+	"views/work"
 ];
 
 module.exports = {
     // Views
     //
 	index: function (req, res) {
-		var response = new Response(req, res);
+		var response = Response(req, res, vm);
 		vm.title = "Works";
-		return response.send(vm);
+		return response.send();
 	},
 
 	editor: function (req, res) {
-		var response = new Response(req, res);
+		var response = Response(req, res, vm);
 		vm.title = "Work - New";
 		vm.cmSettings = {
 			tabSize: 3,
@@ -43,11 +43,11 @@ module.exports = {
 					vm.htmlContent = result.htmlContent;
 					vm.cssContent  = result.cssContent;
 					vm.jsContent   = result.jsContent;
-        }
-				return response.send(vm);
+                }
+				return response.send();
 			})
 			.catch(function (err) {
-				return response.setErr(err).send(vm);
+				return response.sendErr(err);
 			});
     },
 
@@ -56,44 +56,35 @@ module.exports = {
     //
     // Save template
 	saveTemplate: function (req, res) {
-		var response = new Response(req, res);
-
-        // Find criteria
-		var findCriteria = { isTemplate: true };
+		var response = Response(req, res);
 
         // Create criteria
-        var createCriteria = req.body;
-        createCriteria.isTemplate = true;
+		var create = req.body;
+        create.isTemplate = true;
 
         // Find all templates
-		Work.find(findCriteria)
+		Work.find({ isTemplate: true })
 			.then(function (found) {
                 // If not found
 				if (!found.length) {
-					return [Work.create(createCriteria), false];
+					return [Work.create(create), false];
 				}
 				// If found more than one, destroy excess (keep only the first one) and update the first one
 				else if (found.length > 1) {
-					var destroyCriteria = findCriteria;
+					var destroyCriteria = find;
 					destroyCriteria.id = { "!": found[0].id };
-					return [Work.update(found[0], createCriteria), Work.destroy(toDestroy)];
+					return [Work.update(found[0], create), Work.destroy(destroyCriteria)];
 				}
                 // Found one, update
 				else {
-					return [Work.update(found[0], createCriteria), false];
+					return [Work.update(found[0], create), false];
 				}
 			})
 			.spread(function (updated, destroyed) {
-                // If nothing is updated
-				if (!updated) {
-					return response.addError("Error saving template.").send();
-				}
-				else {
-					return response.addSuccess("The template has been saved successfully.").send();
-				}
+			    return response.addSuccess("The template has been saved successfully.").send();
 			})
 			.catch(function (err) {
-				return response.setErr(err).send();
+				return response.sendErr(err);
 			});
     },
 

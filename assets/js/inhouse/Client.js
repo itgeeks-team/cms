@@ -1,154 +1,236 @@
-﻿window.SITE_URL = location.protocol + "//" + location.host;
-
-// Get server data
+﻿// Global variables
 //
-if ($("#hdn-vm").length) {
-	window._vm = JSON.parse($("#hdn-vm").val());
-}
+window._vm = JSON.parse($("#hdn-vm").val());
 window._csrf = $("#hdn-csrf").val();
 $("#hdn-vm, #hdn-csrf").remove();
 
-// Static methods
+
+
+// Validator methods
 //
-window.Client = (function () {
-    /**
-     * Clear the error display and message for our site
-     * @example Client.clearError("#login");
-     * @param {string} selector of the container that has validation
-     * @returns {void}
-     **/
-	var clearError = function (container) {
-		var contentElements = container + " .popper-content"; // popover content comes from here
-		var popoverElements = container + " .popper"; // element that will trigger the popover ui
-		var errorElements = container + " .error"; // error decoration
-		var inputElements = container + " input"; // get all input fields
+/**
+  * Return true if the field value matches the given format RegExp
+  * @example $.validator.methods.pattern("AR1004",element,/^AR\d{4}$/)
+  * @result true
+  * @example $.validator.methods.pattern("BR1004",element,/^AR\d{4}$/)
+  * @result false
+  * @name $.validator.methods.pattern
+  * @type Boolean
+  * @cat Plugins/Validate/Methods
+  */
+$.validator.addMethod("pattern", function (value, element, param) {
+	if (this.optional(element)) {
+		return true;
+	}
+	if (typeof param === "string") {
+		param = new RegExp("^(?:" + param + ")$");
+	}
+	return param.test(value);
+}, "Invalid format.");
 
-		$(contentElements).html("");
-		$(popoverElements).popover("dispose");
-		$(popoverElements).removeClass("popper");
-		$(errorElements).removeClass("error");
-		$(inputElements).val("");
-	};
+$.validator.addMethod("usernameOrEmail", function (value, element) {
+	if (this.optional(element)) {
+		return true;
+	}
+	if (Shared.regexCollections.alphanumeric.test(value) || Shared.regexCollections.email.test(value)) {
+		return true;
+	}
+}, "Please enter a valid username/email.");
+
+
+
+// jQuery methods
+//
+$.fn.extend({
+    /**
+    * Shortcut to .popover("show")
+    * @example $("#my-textbox").popoverShow("Popover message", "top");
+    */
+	popoverShow: function (html = null, placement = "right") {
+		if (html) {
+			this.popover({
+				animation: false,
+				html: true,
+                container: "body",
+				trigger: "manual",
+				placement: placement
+			});
+			this.attr("data-content", html);
+			this.data("bs.popover").setContent();
+		}
+		else {
+			this.popover({
+				placement: placement
+			});
+		}
+		return this.popover("show");
+	},
 
     /**
-     * Initialize bootstrap 4 popover based on container
-     * @example Client.popover("#login");
-     * @param {string} selector of the container that has validation
-     * @returns {void}
+     * Reset form fields and remove validation
+     * @example $("#my-form").resetForm();
      **/
-	var popover = function (popoverContainer) {
-		$(popoverContainer + " .popper").popover({
-			"container": "body",
-			"html": true,
-			"animation": false,
-			"content": function () {
-				return $(this).next(".popper-content").html();
+	resetForm: function() {
+		this.each(function () {
+			if (this.tagName === "FORM") {
+				this.reset();
+				$(this).find("input")
+					.removeClass("error")
+					.removeClass("valid")
+					.popover("dispose");
 			}
 		});
-	};
+	},
 
     /**
-     * Initialize bootstrap 4 popover based on container
-     * @example Client.validation("#login form", loginRules);
-     * @param {string} selector of the form container that need to validate
-     * @param {object} validate rules object
-     * @returns {void}
+     * Validate form
+     * @example $("#my-form").validateForm(rules, messages);
+     * @param jQueryValidation rules
+     * @param jQueryValidation messages
      **/
-	var validation = function (form, validateRules) {
-		if ($("body .modal-backdrop").length > 1) {
-			$("body .modal-backdrop").not(":first").remove();
-		}
-		popover(form);
-		$(form).validate({
-			rules: validateRules,
-			focusInvalid: false,
-			unhighlight: function (element, errorClass, validClass) {
-				$(element).removeClass(errorClass).addClass(validClass).next().html("");
-				$(element).popover("dispose");
-			},
-			errorPlacement: function (error, element) {
-				$(element).addClass("popper").next().html($(error).text());
-				popover(form);
-			},
-			success: function (element) { }
+	validateForm: function (rules, messages) {
+		this.each(function () {
+			if (this.tagName === "FORM") {
+				$(this).validate({
+					rules: rules,
+					messages: messages,
+					focusInvalid: false,
+					highlight: function (element, errorClass, validClass) {
+						$(element)
+							.removeClass(validClass)
+							.addClass(errorClass);
+					},
+					unhighlight: function (element, errorClass, validClass) {
+						$(element)
+							.removeClass(errorClass)
+							.addClass(validClass)
+							.popover("dispose");
+					},
+					errorPlacement: function (error, element) {
+						element.popoverShow(error.text());
+					}
+				});
+			}
 		});
-	};
+	},
 
     /**
-     * Prompt user's confirmation before calling a specified callback.
-     * Indefinite parameters can be passed to this function that
-     * will eventually be passed to the said callback.
-     *
+     * Post form data through AJAX
      * @example
-     * var doSomething = function(param1, param2) {
+     * $("#my-form").ajaxForm("/controller/action", function(response) {
+     *    // Handle response
+     * });
+     * @param url
+     * @param callback
+     **/
+	ajaxForm: function (url, cb) {
+		this.each(function () {
+			if (this.tagName === "FORM") {
+				$.post(url, $(this).serialize(), cb);
+			}
+		});
+	}
+});
+
+
+
+// Client methods
+//
+window.Client = {
+    
+    /**
+     * Prompt confirm() before calling a function.
+     * Indefinite parameters can be passed to the callback.
+     * @example
+     * function myFunction(param1, param2) {
      *    if (param1) {
-     *        if (param2) {
-     *        }
+     *        if (param2) { }
      *    }
      * };
-     * $("#btn-save-work").click(function() {
-     *     Client.confirm(doSomething, true, false);
+     * $("#my-button").click(function() {
+     *     Client.confirm(myFunction, true, false);
      * });
-     *
-     * @param {function} the callback to call if the user confirms to proceed
-     * @param {variadic} variable number of arguments to be passed into the callback
-     * @returns {void}
+     * @param callback
+     * @param variadic arguments of the callback
      **/
-	function confirm(cb) {
+	confirm: function(cb) {
 		if (window.confirm("Are you sure to proceed?")) {
 			var args = Array.prototype.slice.call(arguments, 1);
-			cb.apply(this, args);
+			cb.apply(window, args);
 		}
-	}
+	},
 
 	// TODO: Change this method to show the response using bootstrap brand instead of using alert.
-	function showResponse(response) {
+	showResponse: function(response) {
 		console.log(response);
 
 		if (response.err) {
-			alert("Response:\n(err) {0}".format(response.err));
+			if (response.err.raw) {
+				alert("(err) {0}".format(response.err.raw));
+			}
+			else {
+				alert("An unexpected error has occured.");
+			}
 		}
 		else {
 			var itemsToShow = Enumerable.from(response.items)
 				.select(function (x) { return "({0}) {1}".format(x.type, x.content) })
 				.toArray();
-			alert("Response:\n{0}".format(itemsToShow.join("\n")));
+			alert(itemsToShow.join("\n"));
 		}
-	}
+	},
 
-	function showHeader(show) {
+	showHeader: function(show) {
 		$("#header").toggle(show);
 	}
-
-	return {
-		clearError: clearError,
-		popover: popover,
-		validation: validation,
-		confirm: confirm,
-		showResponse: showResponse,
-        showHeader: showHeader
-	};
-})();
-
-// Hotkeys
-//
+};
 
 
 
-// Event handlers
+// Events
 //
 // Make all form submission to append csrf token automatically
 $("form").submit(function (e) {
-	$(this).append("<input type='hidden' name='_csrf' value='{0}' />".format(_csrf));
+	if (!$(this).find("input[name='_csrf']").length) {
+		$(this).append("<input type='hidden' name='_csrf' value='{0}' />".format(_csrf));
+	}
 	return true;
 });
+
+
 
 // Ajax setup
 //
 $.ajaxSetup({
-	// Append csrf to send data before sending
+	// Append csrf to data before sending
 	beforeSend: function (jqXHR, settings) {
-		settings.data += "&_csrf={0}".format(window._csrf);
+		if (typeof settings.data !== "undefined" && !settings.data.contains("_csrf=")) {
+			settings.data += "&_csrf={0}".format(window._csrf);
+		}
 		return true;
 	}
+});
+
+
+
+// Replace all svg <img> with <svg> (Reason: can change svg fill color anytime)
+//
+$("img[src$='.svg'").each(function () {
+	var $img = $(this);
+	var imgId = $img.attr("id");
+	var imgClass = $img.attr("class");
+
+	$.get($img.attr("src"), function (data) {
+		var $svg = $(data).find("svg");
+
+		if (typeof imgId !== "undefined") {
+			$svg = $svg.attr("id", imgId);
+		}
+		if (typeof imgClass !== "undefined") {
+			$svg = $svg.attr("class", imgClass);
+		}
+
+		$img.replaceWith($svg);
+
+	}, "xml");
 });
