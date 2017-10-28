@@ -32,7 +32,7 @@ $.validator.addMethod("usernameOrEmail", function (value, element) {
 	if (this.optional(element)) {
 		return true;
 	}
-	if (Shared.regexCollections.alphanumeric.test(value) || Shared.regexCollections.email.test(value)) {
+	if (Shared.regexCollection.alphanumeric.test(value) || Shared.regexCollection.email.test(value)) {
 		return true;
 	}
 }, "Please enter a valid username/email.");
@@ -137,7 +137,7 @@ $.fn.extend({
 // Client methods
 //
 window.Client = {
-    
+
     /**
      * Prompt confirm() before calling a function.
      * Indefinite parameters can be passed to the callback.
